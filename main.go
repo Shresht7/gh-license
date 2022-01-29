@@ -6,21 +6,34 @@ import (
 	"github.com/cli/go-gh"
 )
 
+type License struct {
+	Key     string
+	Spdx_id string
+	Name    string
+	Url     string
+	Node_id string
+}
+
 func main() {
-	fmt.Println("hi world, this is the gh-license extension!")
+
+	//	Get gh client
 	client, err := gh.RESTClient(nil)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	response := struct {Login string}{}
-	err = client.Get("user", &response)
+
+	//	Fetch the list of licenses
+	response := []License{}
+	err = client.Get("licenses", &response)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("running as %s\n", response.Login)
-}
 
-// For more examples of using go-gh, see:
-// https://github.com/cli/go-gh/blob/trunk/example_gh_test.go
+	//	Print the list of licenses
+	for _, license := range response {
+		fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
+	}
+
+}
