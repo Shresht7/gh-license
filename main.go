@@ -2,38 +2,21 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/cli/go-gh"
+	"os"
 )
-
-type License struct {
-	Key     string
-	Spdx_id string
-	Name    string
-	Url     string
-	Node_id string
-}
 
 func main() {
 
-	//	Get gh client
-	client, err := gh.RESTClient(nil)
-	if err != nil {
-		fmt.Println(err)
-		return
+	if len(os.Args) < 2 {
+		//	TODO: Show Help Message
+		fmt.Println("Please provide an argument")
+		os.Exit(1)
 	}
 
-	//	Fetch the list of licenses
-	response := []License{}
-	err = client.Get("licenses", &response)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	command := os.Args[1]
 
-	//	Print the list of licenses
-	for _, license := range response {
-		fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
+	switch command {
+	case "list":
+		list()
 	}
-
 }
