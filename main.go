@@ -14,9 +14,12 @@ func main() {
 	}
 
 	command := os.Args[1]
+	args := os.Args[2:]
 
 	switch command {
 	case "list":
 		list()
+	case "create":
+		create(args[0])
 	}
 }
