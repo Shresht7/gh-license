@@ -1,18 +1,21 @@
+/*
+Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+
+*/
 package cmd
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/cli/go-gh"
 	"github.com/spf13/cobra"
 )
 
-// createCmd represents the create command
-var createCmd = &cobra.Command{
-	Use:   "create",
-	Short: "Create a license file",
-	Long:  `Create a license file for your project`,
+// viewCmd represents the view command
+var viewCmd = &cobra.Command{
+	Use:   "view",
+	Short: "View details about a particular license",
+	Long:  `View details about a particular license`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//	Get gh client
@@ -32,25 +35,24 @@ var createCmd = &cobra.Command{
 			return
 		}
 
-		//	TODO: replace placeholder values
-		contents := response.Body
-
 		//	Print the list of licenses
-		os.WriteFile("LICENSE", []byte(contents), os.ModeAppend)
+		fmt.Println(response)
 
 	},
 }
 
+//	TODO: Add --repo flag to target specific repo
+
 func init() {
-	rootCmd.AddCommand(createCmd)
+	rootCmd.AddCommand(viewCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// createCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// viewCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// createCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// viewCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
