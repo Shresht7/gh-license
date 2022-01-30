@@ -19,6 +19,10 @@ type LicenseInfo struct {
 	Body           string
 }
 
+//	============
+//	VIEW COMMAND
+//	============
+
 // viewCmd represents the view command
 var viewCmd = &cobra.Command{
 	Use:   "view",
@@ -36,6 +40,7 @@ var viewCmd = &cobra.Command{
 			return
 		}
 
+		//	License endpoint
 		license := "licenses/" + licenseID
 
 		//	Fetch the license
@@ -57,21 +62,10 @@ var viewCmd = &cobra.Command{
 		fmt.Println("Limitations:", response.Limitations)
 		fmt.Println("\nBody:\n\n", response.Body)
 
-		//	TODO: Display information selectively based on passed arguments. e.g. gh license view mit description implementation
-
 	},
 }
 
 func init() {
+	//	Add view command
 	rootCmd.AddCommand(viewCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// viewCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// viewCmd.Flags().BoolVarP(&web, "web", "w", false, "View in browser")
 }
