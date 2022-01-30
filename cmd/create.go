@@ -2,11 +2,30 @@ package cmd
 
 import (
 	"fmt"
-	"os"
+	"io/ioutil"
+	"strconv"
+	"time"
 
 	"github.com/cli/go-gh"
 	"github.com/spf13/cobra"
+
+	"github.com/Shresht7/gh-license/helpers"
 )
+
+//	FLAGS
+//	-----
+
+var (
+	author      string
+	year        string
+	project     string
+	description string
+	output      string
+)
+
+//	==============
+//	CREATE COMMAND
+//	==============
 
 // createCmd represents the create command
 var createCmd = &cobra.Command{
@@ -22,6 +41,7 @@ var createCmd = &cobra.Command{
 			return
 		}
 
+		//	License endpoint
 		license := "licenses/" + args[0]
 
 		//	Fetch the license
@@ -32,25 +52,40 @@ var createCmd = &cobra.Command{
 			return
 		}
 
-		//	TODO: replace placeholder values
+		//	Fill in placeholders
 		contents := response.Body
+		contents = helpers.FillInPlaceholders(contents, map[string]string{
+			"author":      author,
+			"year":        year,
+			"project":     project,
+			"description": description,
+		})
 
-		//	Print the list of licenses
-		os.WriteFile("LICENSE", []byte(contents), os.ModeAppend)
+		//	Determine destination
+		var dest string
+		if len(output) > 0 {
+			dest = output
+		} else {
+			dest = "LICENSE"
+		}
+
+		//	Write license file
+		ioutil.WriteFile(dest, []byte(contents), 0644)
 
 	},
 }
 
 func init() {
+	//	Add create command
 	rootCmd.AddCommand(createCmd)
 
-	// Here you will define your flags and configuration settings.
+	//	Flags
+	//	-----
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// createCmd.PersistentFlags().String("foo", "", "A help for foo")
+	createCmd.Flags().StringVarP(&author, "author", "a", "", "Project author")
+	createCmd.Flags().StringVarP(&year, "year", "y", strconv.Itoa(time.Now().Year()), "Year")
+	createCmd.Flags().StringVarP(&project, "project", "p", "", "Project name")
+	createCmd.Flags().StringVarP(&description, "description", "d", "", "Project description")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// createCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	createCmd.Flags().StringVarP(&output, "output", "o", "LICENSE", "Filepath")
 }
