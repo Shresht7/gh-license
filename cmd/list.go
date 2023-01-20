@@ -3,17 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/cli/go-gh"
+	"github.com/Shresht7/gh-license/api"
 	"github.com/spf13/cobra"
 )
-
-type License struct {
-	Key     string
-	Spdx_id string
-	Name    string
-	Url     string
-	Node_id string
-}
 
 //	============
 //	LIST COMMAND
@@ -26,27 +18,24 @@ var listCmd = &cobra.Command{
 	Long:  `Show a list of licenses`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		//	Get gh client
-		client, err := gh.RESTClient(nil)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		//	Fetch the list of licenses
-		response := []License{}
-		err = client.Get("licenses", &response)
+		//	Get list of licenses
+		licenses, err := api.GetLicenseList()
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
 		//	Print the list of licenses
-		for _, license := range response {
-			fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
-		}
+		printLicenses(licenses)
 
 	},
+}
+
+// Print the list of licenses to the console
+func printLicenses(licenses []api.LicenseName) {
+	for _, license := range licenses {
+		fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
+	}
 }
 
 func init() {
