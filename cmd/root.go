@@ -14,13 +14,13 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "gh-license",
 	Short: "List and create license files",
-	Long: `List and create license files
+	Long: `List and create license files from GitHub's license API.
 	
 Examples:
-
   gh license list
-  gh license create mit	
-	`,
+  gh license view mit
+  gh license create mit
+`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

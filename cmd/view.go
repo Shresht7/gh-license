@@ -12,10 +12,11 @@ import (
 //	============
 
 var viewCmd = &cobra.Command{
-	Use:   "view",
-	Short: "View details about a particular license",
-	Long:  `View details about a particular license`,
-	Args:  cobra.ExactArgs(1),
+	Use:     "view",
+	Short:   "View details about a particular license",
+	Long:    `View details about a particular license. For a list of available licenses, use the 'list' command.`,
+	Args:    cobra.ExactArgs(1),
+	Example: `gh license view mit`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//	Get license name
