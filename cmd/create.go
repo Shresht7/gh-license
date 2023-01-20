@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/cli/go-gh"
 	"github.com/spf13/cobra"
 
+	"github.com/Shresht7/gh-license/api"
 	"github.com/Shresht7/gh-license/helpers"
 )
 
@@ -16,11 +16,11 @@ import (
 //	-----
 
 var (
-	author      string
-	year        string
-	project     string
-	description string
-	output      string
+	author      string // Author of the project
+	year        string // Year
+	project     string // Project name
+	description string // Project description
+	output      string // Output filepath
 )
 
 //	==============
@@ -34,27 +34,18 @@ var createCmd = &cobra.Command{
 	Long:  `Create a license file for your project`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		//	Get gh client
-		client, err := gh.RESTClient(nil)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		// Get license name
+		name := args[0]
 
-		//	License endpoint
-		license := "licenses/" + args[0]
-
-		//	Fetch the license
-		response := struct{ Body string }{}
-		err = client.Get(license, &response)
+		// Get license details
+		license, err := api.GetLicense(name)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
 		//	Fill in placeholders
-		contents := response.Body
-		contents = helpers.FillInPlaceholders(contents, map[string]string{
+		contents := helpers.FillInPlaceholders(license.Body, map[string]string{
 			"author":      author,
 			"year":        year,
 			"project":     project,
@@ -82,10 +73,9 @@ func init() {
 	//	Flags
 	//	-----
 
-	createCmd.Flags().StringVarP(&author, "author", "a", "", "Project author")
+	createCmd.Flags().StringVarP(&author, "author", "a", "", "Author of the project")
 	createCmd.Flags().StringVarP(&year, "year", "y", strconv.Itoa(time.Now().Year()), "Year")
 	createCmd.Flags().StringVarP(&project, "project", "p", "", "Project name")
 	createCmd.Flags().StringVarP(&description, "description", "d", "", "Project description")
-
 	createCmd.Flags().StringVarP(&output, "output", "o", "LICENSE", "Filepath")
 }
