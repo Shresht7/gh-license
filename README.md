@@ -3,7 +3,7 @@
 
 A GitHub CLI extension to view and generate license files.
 
-All license information is obtained from the GitHub API.
+All license information is obtained from the GitHub API (https://docs.github.com/en/rest/licenses).
 
 > **NOTE**: The only purpose the CLI serves is to save you the effort of opening up a browser to copy-&-paste the appropriate LICENSE text. It does NOT provide legal advice and you should still double-check the LICENSE yourself for any errors.
 
@@ -49,13 +49,13 @@ gh license create <licenseID>
 
 #### Flags
 
-|flag|alias|description|default|
-|----|---|-----------|---|
-|`--author`|`-a`|Specify the author name||
-|`--year`|`-y`|Specify the year|Current year|
-|`--project`|`-p`|Specify the project name||
-|`--description`|`-d`|Describe the project||
-|`--output`|`-o`|Output file|`LICENSE`|
+| flag            | alias | description              | default      |
+| --------------- | ----- | ------------------------ | ------------ |
+| `--author`      | `-a`  | Specify the author name  |              |
+| `--year`        | `-y`  | Specify the year         | Current year |
+| `--project`     | `-p`  | Specify the project name |              |
+| `--description` | `-d`  | Describe the project     |              |
+| `--output`      | `-o`  | Output file              | `LICENSE`    |
 
 #### Examples
 
