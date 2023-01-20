@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strconv"
 	"time"
 
@@ -70,7 +70,7 @@ var createCmd = &cobra.Command{
 		}
 
 		//	Write license file
-		ioutil.WriteFile(dest, []byte(contents), 0644)
+		os.WriteFile(dest, []byte(contents), 0644)
 
 	},
 }
