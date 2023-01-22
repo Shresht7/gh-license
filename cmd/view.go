@@ -14,6 +14,7 @@ import (
 
 var viewCmd = &cobra.Command{
 	Use:     "view",
+	Aliases: []string{"show", "get"},
 	Short:   "View details about a particular license",
 	Long:    `View details about a particular license. For a list of available licenses, use the 'list' command.`,
 	Args:    cobra.ExactArgs(1),
