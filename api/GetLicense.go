@@ -26,26 +26,3 @@ func GetLicense(license string) (License, error) {
 	return response, nil
 
 }
-
-// Fetch the list of all licenses from the GitHub API
-func GetLicenseList() ([]LicenseName, error) {
-
-	// Get gh client
-	client, err := gh.RESTClient(nil)
-	if err != nil {
-		return nil, err
-	}
-
-	// License endpoint
-	endpoint := "licenses"
-
-	// Fetch the license
-	response := []LicenseName{}
-	err = client.Get(endpoint, &response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-
-}

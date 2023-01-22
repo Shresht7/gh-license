@@ -19,7 +19,7 @@ var listCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//	Get list of licenses
-		licenses, err := api.GetLicenseList()
+		licenses, err := api.ListLicenses()
 		if err != nil {
 			fmt.Println(err)
 			return
