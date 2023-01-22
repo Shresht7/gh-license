@@ -31,6 +31,7 @@ var (
 var createCmd = &cobra.Command{
 	Use:     "create",
 	Aliases: []string{"new", "add", "init", "set"},
+	Args:    cobra.ExactArgs(1),
 	Short:   "Create a license file",
 	Long:    `Create a license file for your project`,
 	Run: func(cmd *cobra.Command, args []string) {
