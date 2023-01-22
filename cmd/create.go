@@ -29,9 +29,10 @@ var (
 
 // createCmd represents the create command
 var createCmd = &cobra.Command{
-	Use:   "create",
-	Short: "Create a license file",
-	Long:  `Create a license file for your project`,
+	Use:     "create",
+	Aliases: []string{"new", "add", "init", "set"},
+	Short:   "Create a license file",
+	Long:    `Create a license file for your project`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Get license name
