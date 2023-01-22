@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-//	Maps keys to their corresponding placeholder strings
+// Maps keys to their corresponding placeholder strings
 var placeholders = map[string][]string{
 	"author": {
 		"[fullname]",
@@ -30,7 +30,7 @@ var placeholders = map[string][]string{
 	},
 }
 
-//	Substitute placeholders with provided keys
+// Substitute placeholders with provided keys
 func FillInPlaceholders(contents string, substitutions map[string]string) string {
 	for key, placeholder := range placeholders {
 
