@@ -1,5 +1,4 @@
-# gh-license
-------------
+# `gh-license`
 
 A GitHub CLI extension to view and generate license files.
 
@@ -7,41 +6,57 @@ All license information is obtained from the GitHub API (https://docs.github.com
 
 > **NOTE**: The only purpose the CLI serves is to save you the effort of opening up a browser to copy-&-paste the appropriate LICENSE text. It does NOT provide legal advice and you should still double-check the LICENSE yourself for any errors.
 
-## Install
+---
+
+## 📦 Installation
 
 ### Requirements
 
-- GitHub CLI
+- [GitHub CLI](https://cli.github.com/)
 
 ```sh
 gh extension install Shresht7/gh-license
 ```
 
-## Usage
+---
+
+## 💻 Usage
+
+Invoke the cli extension like so:
 
 ```sh
 gh license <command>
 ```
 
-### Help
+To generate a license file:
+
+```sh
+gh license create MIT
+```
+
+## ⌨️ Commands
+
+### `help`
+
+#### Usage
+
+Use the `help` command to explore the cli.
 
 ```sh
 gh license help
+gh license help <command>
+gh license <command> --help
 ```
 
-### View a list of all licenses
+### `create`
 
-```sh
-gh license list
-```
+#### Alias
 
-### View details about a particular license
+`new`, `add`, `init`, `set`
 
-```sh
-gh license view <licenseID>
-```
+#### Usage
 
-### Create a license file
+Create a license file
 
 ```sh
 gh license create <licenseID>
@@ -49,13 +64,13 @@ gh license create <licenseID>
 
 #### Flags
 
-| flag            | alias | description              | default      |
-| --------------- | ----- | ------------------------ | ------------ |
-| `--author`      | `-a`  | Specify the author name  |              |
-| `--year`        | `-y`  | Specify the year         | Current year |
-| `--project`     | `-p`  | Specify the project name |              |
-| `--description` | `-d`  | Describe the project     |              |
-| `--output`      | `-o`  | Output file              | `LICENSE`    |
+| Flag                | Description              | Default      |
+| ------------------- | ------------------------ | ------------ |
+| `--author, -a`      | Specify the author name  |              |
+| `--year, -y`        | Specify the year         | Current year |
+| `--project, -p`     | Specify the project name |              |
+| `--description, -d` | Describe the project     |              |
+| `--output, -o`      | Output file              | `LICENSE`    |
 
 #### Examples
 
@@ -70,3 +85,39 @@ gh license create mit --author YourName
 ```sh
 gh license create GPL-3.0 --output license.txt --author YourName --year 2022 --project "Your Project" --description "An amazing project"
 ```
+
+### `list`
+
+#### Usage
+
+View a list of all licenses
+
+```sh
+gh license list
+```
+
+### `view`
+
+#### Alias
+
+`show`, `get`
+
+#### Usage
+
+View details about a particular license
+
+```sh
+gh license view <licenseID>
+```
+
+#### Examples
+
+```sh
+gh license view MIT
+```
+
+---
+
+## 📜 License
+
+[MIT License](./LICENSE)
