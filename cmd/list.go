@@ -33,7 +33,7 @@ var listCmd = &cobra.Command{
 }
 
 // Print the list of licenses to the console
-func printLicenses(licenses []api.LicenseName) {
+func printLicenses(licenses []api.LicenseSimple) {
 	for _, license := range licenses {
 		fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
 	}

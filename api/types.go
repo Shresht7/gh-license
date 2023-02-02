@@ -2,7 +2,7 @@ package api
 
 // Reference: https://docs.github.com/en/rest/licenses?apiVersion=2022-11-28
 
-// Details about a particular license from the GitHub API
+// Details of a particular license from the GitHub API
 type License struct {
 	Key            string   `json:"key"`            // The license key (e.g. "mit")
 	Name           string   `json:"name"`           // The license name (e.g. "MIT License")
@@ -19,8 +19,8 @@ type License struct {
 	Featured       bool     `json:"featured"`       // Whether or not the license is featured
 }
 
-// Name of a license from the GitHub API
-type LicenseName struct {
+// Simplified details of a particular license from the GitHub API
+type LicenseSimple struct {
 	Key     string `json:"key"`     // The license key (e.g. "mit")
 	Name    string `json:"name"`    // The license name (e.g. "MIT License")
 	Spdx_id string `json:"spdx_id"` // The license SPDX ID (e.g. "MIT")
