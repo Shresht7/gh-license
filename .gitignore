@@ -16,3 +16,5 @@
 
 /gh-license
 /gh-license.exe
+
+*.code-workspace
