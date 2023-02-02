@@ -1,5 +1,7 @@
 package api
 
+// Reference: https://docs.github.com/en/rest/licenses?apiVersion=2022-11-28
+
 // Details about a particular license from the GitHub API
 type License struct {
 	Key            string   `json:"key"`            // The license key (e.g. "mit")
