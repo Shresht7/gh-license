@@ -17,7 +17,7 @@ func TestListExamples(t *testing.T) {
 	result := ListExamples(examples)
 
 	// ! Mind the 2 spaces before each example. This output is what looks good with cobra.
-	expected := `gh license list
+	expected := `  gh license list
   gh license view mit
   gh license create mit
   gh license create mit --author "John Doe"
