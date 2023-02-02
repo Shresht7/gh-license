@@ -4,6 +4,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/Shresht7/gh-license/helpers"
 )
 
 //	============
@@ -12,15 +14,17 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "gh-license",
-	Short: "List and create license files",
-	Long: `List and create license files from GitHub's license API.
-	
-Examples:
-  gh license list
-  gh license view mit
-  gh license create mit
-`,
+	Use:     "gh-license",
+	Version: "0.1.0",
+	Short:   "List and create license files",
+	Long:    `List and create license files using GitHub's license API`,
+	Example: helpers.ListExamples([]string{
+		"gh license list",
+		"gh license view mit",
+		"gh license create mit",
+		"gh license create mit --author \"John Doe\"",
+		"gh license create mit --year 2020 --author \"John Doe\"",
+	}),
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
