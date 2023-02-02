@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-// Maps keys to their corresponding placeholder strings
+// Maps keys to placeholder strings. The placeholders are replaced with the values of the corresponding key.
 var placeholders = map[string][]string{
 	"author": {
 		"[fullname]",
@@ -30,20 +30,27 @@ var placeholders = map[string][]string{
 	},
 }
 
-// Substitute placeholders with provided keys
+// Substitute placeholders in the given contents with provided substitutions
 func FillInPlaceholders(contents string, substitutions map[string]string) string {
+
+	// Iterate over placeholders and substitute them with the provided substitutions
 	for key, placeholder := range placeholders {
 
-		//	If no substitute, the continue iteration
+		// Get the substitution for the current placeholder
 		substitute, ok := substitutions[key]
+		// If no substitution is provided, skip this placeholder
 		if !ok {
 			continue
 		}
 
-		//	Replace placeholders
+		// Replace all placeholders with the substitution
 		for _, x := range placeholder {
 			contents = strings.Replace(contents, x, substitute, -1)
 		}
+
 	}
+
+	// Return the contents with the placeholders replaced
 	return contents
+
 }
