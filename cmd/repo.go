@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/base64"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -41,7 +42,15 @@ var repoCmd = &cobra.Command{
 		}
 
 		//	Print information about the license
-		fmt.Println(license.Name)
+		fmt.Println("License: " + license.License.Name)
+		fmt.Println("URL: " + license.Html_url)
+		fmt.Println("Description: " + license.Links.Self)
+		content, err := base64.StdEncoding.DecodeString(license.Content)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Println("Content:\n\n" + string(content))
 
 	},
 }
