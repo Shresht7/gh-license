@@ -43,7 +43,16 @@ var repoCmd = &cobra.Command{
 			return
 		}
 
-		if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
+		if cmd.Flag("web").Value.String() == "true" { // Check if web flag is set
+
+			// Open the license in the browser
+			err := helpers.OpenInBrowser(license.Html_url)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+		} else if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
 
 			// Prettify the JSON and print it
 			output, err := helpers.Prettify(license)
@@ -87,4 +96,5 @@ func init() {
 	// Add flags to repo command
 	repoCmd.Flags().BoolP("json", "j", false, "Print the license in JSON format")
 	repoCmd.Flags().BoolP("pretty-json", "p", false, "Print the license in pretty JSON format")
+	repoCmd.Flags().BoolP("web", "w", false, "Open the license in the browser")
 }
