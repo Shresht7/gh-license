@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/Shresht7/gh-license/api"
+	"github.com/Shresht7/gh-license/helpers"
 )
 
 // ============
@@ -32,16 +33,35 @@ var viewCmd = &cobra.Command{
 			return
 		}
 
-		//	Print information about the license
-		fmt.Println("\nName:", license.Name)
-		fmt.Println("SPDX_ID:", license.Spdx_id)
-		fmt.Println("URL:", license.Html_url)
-		fmt.Println("\nDescription:\n\n", license.Description)
-		fmt.Println("\nImplementation:\n\n", license.Implementation)
-		fmt.Println("\nPermissions:", license.Permissions)
-		fmt.Println("Conditions:", license.Conditions)
-		fmt.Println("Limitations:", license.Limitations)
-		fmt.Println("\nBody:\n\n", license.Body)
+		if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
+
+			// Prettify the JSON and print it
+			output, err := helpers.Prettify(license)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Println(output)
+
+		} else if cmd.Flag("json").Value.String() == "true" { // Check if JSON flag is set
+
+			// Print the license details in JSON format
+			fmt.Println(license)
+
+		} else { // Print the license details in a table format by default
+
+			//	Print information about the license
+			fmt.Println("\nName:", license.Name)
+			fmt.Println("SPDX_ID:", license.Spdx_id)
+			fmt.Println("URL:", license.Html_url)
+			fmt.Println("\nDescription:\n\n", license.Description)
+			fmt.Println("\nImplementation:\n\n", license.Implementation)
+			fmt.Println("\nPermissions:", license.Permissions)
+			fmt.Println("Conditions:", license.Conditions)
+			fmt.Println("Limitations:", license.Limitations)
+			fmt.Println("\nBody:\n\n", license.Body)
+
+		}
 
 	},
 }
@@ -53,4 +73,8 @@ var viewCmd = &cobra.Command{
 func init() {
 	//	Add view command
 	rootCmd.AddCommand(viewCmd)
+
+	//	Add flags to view command
+	viewCmd.Flags().BoolP("json", "j", false, "Print the license details in JSON format")
+	viewCmd.Flags().BoolP("pretty-json", "p", false, "Print the license details in pretty JSON format")
 }
