@@ -2,12 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
-	"github.com/cli/go-gh"
 	"github.com/spf13/cobra"
 
 	"github.com/Shresht7/gh-license/api"
+	"github.com/Shresht7/gh-license/helpers"
 )
 
 //	============
@@ -20,21 +19,15 @@ var repoCmd = &cobra.Command{
 	Aliases: []string{"r"},
 	Short:   "View license of a repository",
 	Long:    `View license of a repository. Please provide the repository name in the format 'owner/repo'.`,
+	Args:    cobra.ExactArgs(1),
 	Example: `gh license repo Shresht7/gh-license`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//	Get owner and repo name
-		var owner, repo string
-		if len(args) == 0 { // If no arguments are provided, get the current repository
-			current, err := gh.CurrentRepository()
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-			owner, repo = current.Owner(), current.Name()
-		} else { // If arguments are provided, split them into owner and repo
-			splitArgs := strings.Split(args[0], "/")
-			owner, repo = splitArgs[0], splitArgs[1]
+		owner, repo, err := helpers.DetermineOwnerAndRepo(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
 		}
 
 		//	Get license details
