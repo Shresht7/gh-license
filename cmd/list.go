@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/Shresht7/gh-license/api"
+	"github.com/Shresht7/gh-license/helpers"
 )
 
 // ============
@@ -26,9 +27,28 @@ var listCmd = &cobra.Command{
 			return
 		}
 
-		// Print the list of licenses
-		for _, license := range licenses {
-			fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
+		if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
+
+			// Prettify the JSON and print it
+			output, err := helpers.Prettify(licenses)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Println(output)
+
+		} else if cmd.Flag("json").Value.String() == "true" { // Check if JSON flag is set
+
+			// Print the list of licenses in JSON format
+			fmt.Println(licenses)
+
+		} else { // Print the list of licenses in a table format by default
+
+			// Print the list of licenses
+			for _, license := range licenses {
+				fmt.Printf("%-16s %s\n", license.Spdx_id, license.Name)
+			}
+
 		}
 
 	},
@@ -39,6 +59,10 @@ var listCmd = &cobra.Command{
 // ----
 
 func init() {
-	//	Add list command
+	// Add list command
 	rootCmd.AddCommand(listCmd)
+
+	// Add Flags
+	listCmd.Flags().BoolP("json", "j", false, "Output in JSON format")
+	listCmd.Flags().BoolP("pretty-json", "p", false, "Output in pretty JSON format")
 }
