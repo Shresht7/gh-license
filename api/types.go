@@ -1,7 +1,5 @@
 package api
 
-// TODO: Implement Stringer interface for these structs
-
 // Reference: https://docs.github.com/en/rest/licenses?apiVersion=2022-11-28
 
 // Details of a particular license from the GitHub API
