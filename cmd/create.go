@@ -23,6 +23,12 @@ var createCmd = &cobra.Command{
 	Aliases: []string{"new", "add", "init", "set"},
 	Short:   "Create a license file",
 	Long:    `Create a license file for your project.`,
+	Example: helpers.ListExamples([]string{
+		"gh-license create mit",
+		"gh-license create mit --author Shresht7 --year 2023",
+		"gh-license create --web",
+		"gh-license create mit --web",
+	}),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// License Name
