@@ -24,6 +24,8 @@ var repoCmd = &cobra.Command{
 		"gh license repo",
 		"gh license repo Shresht7/gh-license",
 		"gh license repo gh-license",
+		"gh license repo --json",
+		"gh license repo Shresht7/gh-license --pretty-json",
 	}),
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -41,16 +43,35 @@ var repoCmd = &cobra.Command{
 			return
 		}
 
-		// Print information about the license
-		fmt.Println("License: " + license.License.Name)
-		fmt.Println("URL: " + license.Html_url)
-		fmt.Println("Description: " + license.Links.Self)
-		content, err := base64.StdEncoding.DecodeString(license.Content)
-		if err != nil {
-			fmt.Println(err)
-			return
+		if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
+
+			// Prettify the JSON and print it
+			output, err := helpers.Prettify(license)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Println(output)
+
+		} else if cmd.Flag("json").Value.String() == "true" { // Check if JSON flag is set
+
+			// Print the license in JSON format
+			fmt.Println(license)
+
+		} else { // Print the license in a table format by default
+
+			// Print information about the license
+			fmt.Println("License: " + license.License.Name)
+			fmt.Println("URL: " + license.Html_url)
+			fmt.Println("Description: " + license.Links.Self)
+			content, err := base64.StdEncoding.DecodeString(license.Content)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			fmt.Println("Content:\n\n" + string(content))
+
 		}
-		fmt.Println("Content:\n\n" + string(content))
 
 	},
 }
@@ -62,4 +83,8 @@ var repoCmd = &cobra.Command{
 func init() {
 	//	Add repo command
 	rootCmd.AddCommand(repoCmd)
+
+	// Add flags to repo command
+	repoCmd.Flags().BoolP("json", "j", false, "Print the license in JSON format")
+	repoCmd.Flags().BoolP("pretty-json", "p", false, "Print the license in pretty JSON format")
 }
