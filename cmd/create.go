@@ -12,8 +12,9 @@ import (
 	"github.com/Shresht7/gh-license/helpers"
 )
 
-//	FLAGS
-//	-----
+// -----
+// FLAGS
+// -----
 
 var (
 	author      string // Author of the project
@@ -27,16 +28,16 @@ var (
 //	CREATE COMMAND
 //	==============
 
-// createCmd represents the create command
+// Create a license file
 var createCmd = &cobra.Command{
 	Use:     "create",
 	Aliases: []string{"new", "add", "init", "set"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "Create a license file",
-	Long:    `Create a license file for your project`,
+	Long:    `Create a license file for your project.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		// Get license name
+		// Get license name from args
 		name := args[0]
 
 		// Get license details
@@ -46,7 +47,7 @@ var createCmd = &cobra.Command{
 			return
 		}
 
-		//	Fill in placeholders
+		// Fill in placeholders in license body
 		contents := helpers.FillInPlaceholders(license.Body, map[string]string{
 			"author":      author,
 			"year":        year,
@@ -54,7 +55,7 @@ var createCmd = &cobra.Command{
 			"description": description,
 		})
 
-		//	Determine destination
+		// Determine destination of license file
 		var dest string
 		if len(output) > 0 {
 			dest = output
@@ -62,19 +63,21 @@ var createCmd = &cobra.Command{
 			dest = "LICENSE"
 		}
 
-		//	Write license file
+		// Write license file to the destination
 		os.WriteFile(dest, []byte(contents), 0644)
 
 	},
 }
 
+// ----
+// INIT
+// ----
+
 func init() {
-	//	Add create command
+	// Add create command
 	rootCmd.AddCommand(createCmd)
 
-	//	Flags
-	//	-----
-
+	// Add flags to create command
 	createCmd.Flags().StringVarP(&author, "author", "a", "", "Author of the project")
 	createCmd.Flags().StringVarP(&year, "year", "y", strconv.Itoa(time.Now().Year()), "Year")
 	createCmd.Flags().StringVarP(&project, "project", "p", "", "Project name")

@@ -7,32 +7,34 @@ import (
 	"github.com/cli/go-gh/pkg/repository"
 )
 
-// Determine owner and repo name from argument
+// Determine the owner and repo name from arguments passed to the command
+// ... or from the current repository.
 func DetermineOwnerAndRepo(args []string) (string, string, error) {
-
-	// Declare owner and repo
-	var owner, repo string
 
 	// Get current repository
 	currentRepo, err := gh.CurrentRepository()
 	if err != nil {
 		return "", "", err
 	}
-	// Set default owner and repo
-	owner, repo = currentRepo.Owner(), currentRepo.Name()
+	// Initialize owner and repo using the current repository
+	owner, repo := currentRepo.Owner(), currentRepo.Name()
 
-	// If arguments are provided, parse it to get the specified owner and repo
+	// If arguments are provided, use them to determine owner and repo
 	if len(args) > 0 {
-		arg := args[0]
-		// If owner is not provided, add it to the argument before parsing
+		arg := args[0] // Only take the first argument (`owner/repo` or `repo`)
+
+		// If the argument is a repo name, assume it's in the current owner namespace
+		// and prepend the owner name to the argument to form a `owner/repo` string
 		if !strings.Contains(arg, "/") {
 			arg = owner + "/" + arg
 		}
-		// Parse argument to get owner and repo
+
+		// Parse the argument to determine owner and repo
 		parsed, err := repository.Parse(arg)
 		if err != nil {
 			return "", "", err
 		}
+		// Override owner and repo
 		owner, repo = parsed.Owner(), parsed.Name()
 	}
 

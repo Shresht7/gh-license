@@ -15,7 +15,7 @@ func GetRepoLicense(owner, repo string) (LicenseContent, error) {
 		return LicenseContent{}, err
 	}
 
-	// Set the license endpoint
+	// Set the endpoint
 	endpoint := "repos/" + owner + "/" + repo + "/license"
 
 	// Fetch the license from the GitHub API
@@ -25,7 +25,7 @@ func GetRepoLicense(owner, repo string) (LicenseContent, error) {
 		return LicenseContent{}, err
 	}
 
-	// Return the license
+	// Return the license information
 	return response, nil
 
 }

@@ -15,7 +15,7 @@ func GetLicense(license string) (License, error) {
 		return License{}, err
 	}
 
-	// Set the license endpoint
+	// Set the endpoint
 	endpoint := "licenses/" + license
 
 	// Fetch the license from the GitHub API
@@ -25,7 +25,7 @@ func GetLicense(license string) (License, error) {
 		return License{}, err
 	}
 
-	// Return the license
+	// Return the license information
 	return response, nil
 
 }
