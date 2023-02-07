@@ -44,25 +44,8 @@ var createCmd = &cobra.Command{
 
 		if shouldLaunchWeb { // Check if web flag is set
 
-			// Determine URL to create license
-			url := fmt.Sprintf("https://github.com/%s/%s/community/license/new", author, repo)
-
-			// Add query params
-			queryParams := []string{}
-			if name != "" {
-				queryParams = append(queryParams, "template="+name)
-			}
-			if output != "" {
-				queryParams = append(queryParams, "filename="+output)
-			}
-
-			// Convert to query string and add to URL
-			queryString := strings.Join(queryParams, "&")
-			if queryString != "" {
-				url += "?" + queryString
-			}
-
 			// Open the license in the browser
+			url := determineUrl(name, author, repo, output)
 			err = helpers.OpenInBrowser(url)
 			if err != nil {
 				fmt.Println(err)
@@ -104,6 +87,30 @@ var createCmd = &cobra.Command{
 		os.WriteFile(dest, []byte(contents), 0644)
 
 	},
+}
+
+// Determine URL to create license file using the web interface
+func determineUrl(name, author, repo, output string) string {
+	// Determine URL to create license
+	url := fmt.Sprintf("https://github.com/%s/%s/community/license/new", author, repo)
+
+	// Add query params
+	queryParams := []string{}
+	if name != "" {
+		queryParams = append(queryParams, "template="+name)
+	}
+	if output != "" {
+		queryParams = append(queryParams, "filename="+output)
+	}
+
+	// Convert to query string and add to URL
+	queryString := strings.Join(queryParams, "&")
+	if queryString != "" {
+		url += "?" + queryString
+	}
+
+	// Return URL
+	return url
 }
 
 // ----
