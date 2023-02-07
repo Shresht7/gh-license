@@ -32,7 +32,16 @@ var listCmd = &cobra.Command{
 			return
 		}
 
-		if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
+		if cmd.Flag("web").Value.String() == "true" { // Check if web flag is set
+
+			// Open the license in the browser
+			err := helpers.OpenInBrowser("https://choosealicense.com/licenses/")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+		} else if cmd.Flag("pretty-json").Value.String() == "true" { // Check if pretty JSON flag is set
 
 			// Prettify the JSON and print it
 			output, err := helpers.Prettify(licenses)
@@ -70,4 +79,5 @@ func init() {
 	// Add Flags
 	listCmd.Flags().BoolP("json", "j", false, "Output in JSON format")
 	listCmd.Flags().BoolP("pretty-json", "p", false, "Output in pretty JSON format")
+	listCmd.Flags().BoolP("web", "w", false, "Open the license in the browser")
 }
