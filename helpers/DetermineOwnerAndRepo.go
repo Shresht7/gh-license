@@ -9,7 +9,7 @@ import (
 
 // Determine the owner and repo name from arguments passed to the command
 // ... or from the current repository.
-func DetermineOwnerAndRepo(args []string) (string, string, error) {
+func DetermineOwnerAndRepo(args ...string) (string, string, error) {
 
 	// Get current repository
 	currentRepo, err := gh.CurrentRepository()

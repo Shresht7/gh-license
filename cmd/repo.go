@@ -28,7 +28,7 @@ var repoCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Get owner and repo name from args
-		owner, repo, err := helpers.DetermineOwnerAndRepo(args)
+		owner, repo, err := helpers.DetermineOwnerAndRepo(args...)
 		if err != nil {
 			fmt.Println(err)
 			return
