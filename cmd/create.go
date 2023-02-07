@@ -75,16 +75,8 @@ var createCmd = &cobra.Command{
 			"description": description,
 		})
 
-		// Determine destination of license file
-		var dest string
-		if len(output) > 0 {
-			dest = output
-		} else {
-			dest = "LICENSE"
-		}
-
 		// Write license file to the destination
-		os.WriteFile(dest, []byte(contents), 0644)
+		os.WriteFile(output, []byte(contents), 0644)
 
 	},
 }
