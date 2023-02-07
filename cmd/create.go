@@ -12,18 +12,6 @@ import (
 	"github.com/Shresht7/gh-license/helpers"
 )
 
-// -----
-// FLAGS
-// -----
-
-var (
-	author      string // Author of the project
-	year        string // Year
-	project     string // Project name
-	description string // Project description
-	output      string // Output filepath
-)
-
 //	==============
 //	CREATE COMMAND
 //	==============
@@ -49,14 +37,15 @@ var createCmd = &cobra.Command{
 
 		// Fill in placeholders in license body
 		contents := helpers.FillInPlaceholders(license.Body, map[string]string{
-			"author":      author,
-			"year":        year,
-			"project":     project,
-			"description": description,
+			"author":      cmd.Flag("author").Value.String(),
+			"year":        cmd.Flag("year").Value.String(),
+			"project":     cmd.Flag("project").Value.String(),
+			"description": cmd.Flag("description").Value.String(),
 		})
 
 		// Determine destination of license file
 		var dest string
+		output := cmd.Flag("output").Value.String()
 		if len(output) > 0 {
 			dest = output
 		} else {
@@ -78,9 +67,9 @@ func init() {
 	rootCmd.AddCommand(createCmd)
 
 	// Add flags to create command
-	createCmd.Flags().StringVarP(&author, "author", "a", "", "Author of the project")
-	createCmd.Flags().StringVarP(&year, "year", "y", strconv.Itoa(time.Now().Year()), "Year")
-	createCmd.Flags().StringVarP(&project, "project", "p", "", "Project name")
-	createCmd.Flags().StringVarP(&description, "description", "d", "", "Project description")
-	createCmd.Flags().StringVarP(&output, "output", "o", "LICENSE", "Filepath")
+	createCmd.Flags().StringP("author", "a", "", "Author of the project")
+	createCmd.Flags().StringP("year", "y", strconv.Itoa(time.Now().Year()), "Year")
+	createCmd.Flags().StringP("project", "p", "", "Project name")
+	createCmd.Flags().StringP("description", "d", "", "Project description")
+	createCmd.Flags().StringP("output", "o", "LICENSE", "Filepath")
 }
