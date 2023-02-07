@@ -19,7 +19,11 @@ var repoCmd = &cobra.Command{
 	Aliases: []string{"r"},
 	Short:   "View license of a repository",
 	Long:    `View license of a repository. Please provide the repository name in the format 'owner/repo'.`,
-	Example: `gh license repo Shresht7/gh-license`,
+	Example: helpers.ListExamples([]string{
+		"gh license repo",
+		"gh license repo Shresht7/gh-license",
+		"gh license repo gh-license",
+	}),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//	Get owner and repo name
