@@ -18,6 +18,11 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Show a list of licenses",
 	Long:  `Show a list of licenses available on GitHub.`,
+	Example: helpers.ListExamples([]string{
+		"gh-license list",
+		"gh-license list --json",
+		"gh-license list --pretty-json",
+	}),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Get list of licenses
