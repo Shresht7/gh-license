@@ -8,7 +8,7 @@ import (
 )
 
 // Determine owner and repo name from argument
-func DetermineOwnerAndRepo(arg string) (string, string, error) {
+func DetermineOwnerAndRepo(args []string) (string, string, error) {
 
 	// Declare owner and repo
 	var owner, repo string
@@ -22,7 +22,8 @@ func DetermineOwnerAndRepo(arg string) (string, string, error) {
 	owner, repo = currentRepo.Owner(), currentRepo.Name()
 
 	// If arguments are provided, parse it to get the specified owner and repo
-	if len(arg) > 0 {
+	if len(args) > 0 {
+		arg := args[0]
 		// If owner is not provided, add it to the argument before parsing
 		if !strings.Contains(arg, "/") {
 			arg = owner + "/" + arg
