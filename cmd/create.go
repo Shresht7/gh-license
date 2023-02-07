@@ -66,10 +66,17 @@ func init() {
 	// Add create command
 	rootCmd.AddCommand(createCmd)
 
+	// Determine owner and repo from current directory
+	owner, repo, err := helpers.DetermineOwnerAndRepo()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// Add flags to create command
-	createCmd.Flags().StringP("author", "a", "", "Author of the project")
+	createCmd.Flags().StringP("author", "a", owner, "Author of the project")
 	createCmd.Flags().StringP("year", "y", strconv.Itoa(time.Now().Year()), "Year")
-	createCmd.Flags().StringP("project", "p", "", "Project name")
+	createCmd.Flags().StringP("project", "p", repo, "Project name")
 	createCmd.Flags().StringP("description", "d", "", "Project description")
 	createCmd.Flags().StringP("output", "o", "LICENSE", "Filepath")
 }
