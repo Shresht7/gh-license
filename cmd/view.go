@@ -20,7 +20,11 @@ var viewCmd = &cobra.Command{
 	Short:   "View details about a particular license",
 	Long:    `View details about a particular license. For a list of available licenses, use the 'list' command.`,
 	Args:    cobra.ExactArgs(1),
-	Example: `gh license view mit`,
+	Example: helpers.ListExamples([]string{
+		"gh-license view mit",
+		"gh-license view mit --json",
+		"gh-license view mit --pretty-json",
+	}),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//	Get license name from args
