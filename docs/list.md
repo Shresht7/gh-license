@@ -1,4 +1,4 @@
-# `gh-license list`
+# `list`
 
 Show a list of licenses
 
@@ -14,11 +14,11 @@ gh-license list [flags]
 
 ## Flags
 
-```sh
---json false Output in JSON format
---pretty-json false Output in pretty JSON format
---web false Open the license in the browser
-```
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--json, -j` | Output in JSON format | false |
+| `--pretty-json, -p` | Output in pretty JSON format | false |
+| `--web, -w` | Open the license in the browser | false |
 
 ## Examples
 
@@ -26,6 +26,11 @@ gh-license list [flags]
   gh-license list
   gh-license list --json
   gh-license list --pretty-json
-
 ```
 
+## See Also
+
+* [`gh-license`](./gh-license.md)
+* [`create`](./create.md)
+* [`repo`](./repo.md)
+* [`view`](./view.md)
