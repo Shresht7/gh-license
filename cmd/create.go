@@ -127,7 +127,7 @@ func determineUrl(name, author, repo, output string) string {
 
 func init() {
 	// Add create command
-	rootCmd.AddCommand(createCmd)
+	RootCmd.AddCommand(createCmd)
 
 	// Determine owner and repo from current directory
 	owner, repo, _ := helpers.DetermineOwnerAndRepo()
