@@ -130,11 +130,10 @@ func init() {
 	rootCmd.AddCommand(createCmd)
 
 	// Determine owner and repo from current directory
-	owner, repo, err := helpers.DetermineOwnerAndRepo()
-	if err != nil {
-		log.Fatalln(err)
-		return
-	}
+	owner, repo, _ := helpers.DetermineOwnerAndRepo()
+	// if it errors, continue regardless
+	// this probably means that the user has not initialized a git repo
+	// but it won't stop the user from creating a license file
 
 	// Add flags to create command
 	createCmd.Flags().StringP("author", "a", owner, "Author of the project")
