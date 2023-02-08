@@ -1,6 +1,6 @@
 module github.com/Shresht7/gh-license
 
-go 1.18
+go 1.19
 
 require github.com/cli/go-gh v1.0.0
 
