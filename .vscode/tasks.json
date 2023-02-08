@@ -13,6 +13,15 @@
             }
         },
         {
+            "label": "doc",
+            "type": "shell",
+            "command": "go run docs/main.go",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "test",
             "type": "shell",
             "command": "go test ./...",
