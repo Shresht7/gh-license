@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/base64"
 	"fmt"
+	"log"
 
 	"github.com/spf13/cobra"
 
@@ -32,14 +33,14 @@ var repoCmd = &cobra.Command{
 		// Get owner and repo name from args
 		owner, repo, err := helpers.DetermineOwnerAndRepo(args...)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
 			return
 		}
 
 		// Get license details
 		license, err := api.GetRepoLicense(owner, repo)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
 			return
 		}
 
@@ -48,7 +49,7 @@ var repoCmd = &cobra.Command{
 			// Open the license in the browser
 			err := helpers.OpenInBrowser(license.Html_url)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 
@@ -57,7 +58,7 @@ var repoCmd = &cobra.Command{
 			// Prettify the JSON and print it
 			output, err := helpers.Prettify(license)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 			fmt.Println(output)

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/spf13/cobra"
 
@@ -33,7 +34,7 @@ var viewCmd = &cobra.Command{
 		//	Get license details from GitHub
 		license, err := api.GetLicense(name)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
 			return
 		}
 
@@ -42,7 +43,7 @@ var viewCmd = &cobra.Command{
 			// Open the license in the browser
 			err := helpers.OpenInBrowser(license.Html_url)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 
@@ -51,7 +52,7 @@ var viewCmd = &cobra.Command{
 			// Prettify the JSON and print it
 			output, err := helpers.Prettify(license)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 			fmt.Println(output)

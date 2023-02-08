@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/spf13/cobra"
 
@@ -25,10 +26,10 @@ var listCmd = &cobra.Command{
 	}),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		// Get list of licenses
+		// Get the list of licenses from the API
 		licenses, err := api.ListLicenses()
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
 			return
 		}
 
@@ -37,7 +38,7 @@ var listCmd = &cobra.Command{
 			// Open the license in the browser
 			err := helpers.OpenInBrowser("https://choosealicense.com/licenses/")
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 
@@ -46,7 +47,7 @@ var listCmd = &cobra.Command{
 			// Prettify the JSON and print it
 			output, err := helpers.Prettify(licenses)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 			fmt.Println(output)

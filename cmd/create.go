@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -54,23 +55,27 @@ var createCmd = &cobra.Command{
 			url := determineUrl(name, author, repo, output)
 			err = helpers.OpenInBrowser(url)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatalln(err)
 				return
 			}
 
-			return // Exit the function
+			// Return early as we don't need to create a license file locally in this case
+			return
 		}
 
 		// Check if license name is provided before proceeding
 		if name == "" {
-			fmt.Println("Please provide a license name. Run `gh license list` to see a list of available licenses.")
-			return // Exit the function
+			log.Fatalln("Please provide a license name. Run `gh license list` to see a list of available licenses.")
+			return
 		}
 
-		// Get license details
+		// Get license details from GitHub API
 		license, err := api.GetLicense(name)
 		if err != nil {
-			fmt.Println(err)
+			if strings.Contains(err.Error(), "404: Not Found") {
+				err = fmt.Errorf("%s\nLicense '%s' not found. Run `gh license list` to see a list of available licenses.", err, name)
+			}
+			log.Fatalln(err)
 			return
 		}
 		// Fill in placeholders in license body
@@ -82,11 +87,16 @@ var createCmd = &cobra.Command{
 		})
 
 		// Write license file to the destination
-		os.WriteFile(output, []byte(contents), 0644)
+		err = os.WriteFile(output, []byte(contents), 0644)
+		if err != nil {
+			log.Fatalln(err)
+			return
+		}
 
 	},
 }
 
+// ? See if there is a cleaner way to do this
 // Determine URL to create license file using the web interface
 func determineUrl(name, author, repo, output string) string {
 	// Determine URL to create license
@@ -122,7 +132,7 @@ func init() {
 	// Determine owner and repo from current directory
 	owner, repo, err := helpers.DetermineOwnerAndRepo()
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalln(err)
 		return
 	}
 
