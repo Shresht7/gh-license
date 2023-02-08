@@ -15,7 +15,7 @@
         {
             "label": "doc",
             "type": "shell",
-            "command": "go run docs/main.go docs/GenerateMarkdown.go",
+            "command": "go run docs/main.go docs/GenerateMarkdown.go docs/MarkdownWriter.go",
             "group": {
                 "kind": "build",
                 "isDefault": true
