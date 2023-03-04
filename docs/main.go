@@ -31,10 +31,11 @@ func CreateMarkdownFile(cmd *cobra.Command, path string) error {
 	defer w.Close()
 
 	// generate markdown for the command
-	err = GenerateMarkdown(cmd, w)
+	md, err := GenerateMarkdown(cmd)
 	if err != nil {
 		return err
 	}
+	w.WriteString(md)
 
 	return nil
 }

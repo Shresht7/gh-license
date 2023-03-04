@@ -1,45 +1,60 @@
 package main
 
 import (
-	"io"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	"github.com/Shresht7/Scribe/helpers"
+	md "github.com/Shresht7/Scribe/markdown"
 )
 
-// GenerateMarkdown generates the markdown for the given command.
-func GenerateMarkdown(cmd *cobra.Command, w io.Writer) error {
+// Map applies the given function to each item in the given slice and returns a new slice with the results.
+func Map[T any](items []T, fn func(T) T) []T {
+	result := make([]T, len(items))
+	for i, item := range items {
+		result[i] = fn(item)
+	}
+	return result
+}
 
-	// Create a new markdown writer
-	md := NewMarkdownWriter()
+// GenerateMarkdown generates the markdown for the given command.
+func GenerateMarkdown(cmd *cobra.Command) (string, error) {
+
+	// Create a new markdown document
+	doc := md.NewDocument()
 
 	// Write the title
-	md.WriteHeading(1, wrap("`", cmd.Name()))
+	doc.WriteHeading(1, helpers.Wrap("`", cmd.Name()))
 
 	// Write the short Description
-	md.WriteParagraph(cmd.Short)
+	doc.WriteParagraph(cmd.Short)
 
 	// Write the aliases
 	if len(cmd.Aliases) > 0 {
-		md.WriteHeading(2, "Aliases")
-		md.WriteParagraph(wrapAndJoin("`", ", ", cmd.Aliases...))
+		doc.WriteHeading(2, "Aliases")
+		doc.WriteParagraph(
+			strings.Join(Map(cmd.Aliases, func(alias string) string {
+				return helpers.Wrap("`", alias)
+			}), ", "))
 	}
 
 	// Write the long description
 	if cmd.Long != "" {
-		md.WriteHeading(2, "Description")
-		md.WriteParagraph(cmd.Long)
+		doc.WriteHeading(2, "Description")
+		doc.WriteParagraph(cmd.Long)
 	}
 
 	// Write the usage
 	if cmd.Runnable() {
-		md.WriteHeading(2, "Usage")
-		md.WriteCodeBlock(cmd.UseLine())
+		doc.WriteHeading(2, "Usage")
+		doc.WriteCodeBlock(cmd.UseLine())
 	}
 
 	// Write the flags
 	if cmd.Flags().HasFlags() {
-		md.WriteHeading(2, "Flags")
+		doc.WriteHeading(2, "Flags")
 
 		// Create a markdown table
 
@@ -51,60 +66,56 @@ func GenerateMarkdown(cmd *cobra.Command, w io.Writer) error {
 		cmd.Flags().VisitAll(func(flag *pflag.Flag) {
 			rows = append(rows, []string{
 				"`--" + flag.Name + ", -" + flag.Shorthand + "`",
-				wrap("`", flag.Value.Type()),
+				helpers.Wrap("`", flag.Value.Type()),
 				flag.Usage,
 				flag.DefValue,
 			})
 		})
 
 		// Write the table
-		md.WriteTable(headers, rows)
+		doc.WriteTable(headers, rows)
 	}
 
 	// Write the examples
 	if len(cmd.Example) > 0 {
-		md.WriteHeading(2, "Examples")
-		md.WriteCodeBlock(cmd.Example)
+		doc.WriteHeading(2, "Examples")
+		doc.WriteCodeBlock(cmd.Example)
 	}
 
 	// Write the see also section
 	if cmd.HasParent() || len(cmd.Commands()) > 0 {
-		md.WriteHeading(2, "See Also")
+		doc.WriteHeading(2, "See Also")
 	}
 
-	var name string = ""
+	links := []string{}
 	// Link to the parent command
 	if cmd.HasParent() {
-		name = cmd.Parent().Name()
-		md.buf.WriteString("- ")
-		md.WriteLink(name, "./"+name+".md")
-		md.buf.WriteString("\n")
+		links = append(links, LinkFile(cmd.Parent().Name()))
 
 		// Link to the other sibling commands
 		for _, subCmd := range cmd.Parent().Commands() {
 			if subCmd != cmd {
-				name = subCmd.Name()
-				md.buf.WriteString("- ")
-				md.WriteLink(name, "./"+name+".md")
-				md.buf.WriteString("\n")
+				links = append(links, LinkFile(subCmd.Name()))
 			}
 		}
 	}
-
 	// Link to the child commands
 	for _, subCmd := range cmd.Commands() {
-		name = subCmd.Name()
-		md.buf.WriteString("- ")
-		md.WriteLink(name, "./"+name+".md")
-		md.buf.WriteString("\n")
+		links = append(links, LinkFile(subCmd.Name()))
 	}
+	// Write the links
+	doc.WriteUnorderedList(links)
 
 	// Write the buffer to the writer
-	_, err := md.buf.WriteTo(w)
-	if err != nil {
-		return err
-	}
+	// _, err := md.buf.WriteTo(w)
+	// if err != nil {
+	// 	return err
+	// }
 
-	return nil
+	return doc.String(), nil
 
+}
+
+func LinkFile(name string) string {
+	return md.Link(name, "./"+name+".md").String()
 }
