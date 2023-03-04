@@ -18,14 +18,14 @@ gh-license create [flags]
 
 ## Flags
 
-| Flag | Type | Description | Default |
-| --- | --- | --- | --- |
-| `--author, -a` | `string` | Author of the project | Shresht7
-| `--description, -d` | `string` | Project description | 
-| `--output, -o` | `string` | Filepath | LICENSE
-| `--project, -p` | `string` | Project name | gh-license
-| `--web, -w` | `bool` | Create license file using the web interface | false
-| `--year, -y` | `string` | Year | 2023
+| Flag                | Type     | Description                                 | Default    |
+| ------------------- | -------- | ------------------------------------------- | ---------- |
+| `--author, -a`      | `string` | Author of the project                       | Shresht7   |
+| `--description, -d` | `string` | Project description                         |            |
+| `--output, -o`      | `string` | Filepath                                    | LICENSE    |
+| `--project, -p`     | `string` | Project name                                | gh-license |
+| `--web, -w`         | `bool`   | Create license file using the web interface | false      |
+| `--year, -y`        | `string` | Year                                        | 2023       |
 
 ## Examples
 
@@ -39,7 +39,7 @@ gh-license create [flags]
 
 ## See Also
 
-- [gh-license](./gh-license.md)
-- [list](./list.md)
-- [repo](./repo.md)
-- [view](./view.md)
+* [gh-license](./gh-license.md)
+* [list](./list.md)
+* [repo](./repo.md)
+* [view](./view.md)

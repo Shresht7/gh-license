@@ -18,11 +18,11 @@ gh-license view [flags]
 
 ## Flags
 
-| Flag | Type | Description | Default |
-| --- | --- | --- | --- |
-| `--json, -j` | `bool` | Print the license details in JSON format | false
-| `--pretty-json, -p` | `bool` | Print the license details in pretty JSON format | false
-| `--web, -w` | `bool` | Open the license in the browser | false
+| Flag                | Type   | Description                                     | Default |
+| ------------------- | ------ | ----------------------------------------------- | ------- |
+| `--json, -j`        | `bool` | Print the license details in JSON format        | false   |
+| `--pretty-json, -p` | `bool` | Print the license details in pretty JSON format | false   |
+| `--web, -w`         | `bool` | Open the license in the browser                 | false   |
 
 ## Examples
 
@@ -35,7 +35,7 @@ gh-license view [flags]
 
 ## See Also
 
-- [gh-license](./gh-license.md)
-- [create](./create.md)
-- [list](./list.md)
-- [repo](./repo.md)
+* [gh-license](./gh-license.md)
+* [create](./create.md)
+* [list](./list.md)
+* [repo](./repo.md)
