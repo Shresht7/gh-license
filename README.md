@@ -6,36 +6,6 @@ All license information is obtained from the GitHub API (https://docs.github.com
 
 > **NOTE**: The only purpose the CLI serves, is to save you the effort of opening up a browser to copy-&-paste the appropriate LICENSE text. It does NOT provide legal advice and you should still double-check the LICENSE yourself for any errors.
 
-<details>
-
-  <summary>
-    Table of Contents
-  </summary>
-
-- [`gh-license`](#gh-license)
-  - [📦 Installation](#-installation)
-    - [Requirements](#requirements)
-  - [💻 Usage](#-usage)
-  - [⌨️ Commands](#️-commands)
-    - [`help`](#help)
-      - [Usage](#usage)
-    - [`create`](#create)
-      - [Alias](#alias)
-      - [Usage](#usage-1)
-      - [Flags](#flags)
-      - [Examples](#examples)
-        - [Create a MIT license with author name](#create-a-mit-license-with-author-name)
-        - [Create a GPL-3.0 license with project details in license.txt](#create-a-gpl-30-license-with-project-details-in-licensetxt)
-    - [`list`](#list)
-      - [Usage](#usage-2)
-    - [`view`](#view)
-      - [Alias](#alias-1)
-      - [Usage](#usage-3)
-      - [Examples](#examples-1)
-  - [📜 License](#-license)
-
-</details>
-
 ---
 
 ## 📦 Installation
@@ -61,7 +31,7 @@ gh license <command>
 For example, to generate a license file:
 
 ```sh
-gh license create MIT
+gh license create mit
 ```
 
 ![Usage Demonstration](docs/demo.gif)
@@ -74,25 +44,10 @@ gh license create MIT
 
 ## ⌨️ Commands
 
-### `help`
-
-#### Usage
-
-Use the `help` command to explore the cli.
-
-```sh
-gh license help
-gh license help <command>
-gh license <command> --help
-```
-
-<div align="right">
-
-[⬆️ Back to top][top]
-
-</div>
 
 ### `create`
+
+Create a license file
 
 #### Alias
 
@@ -100,34 +55,28 @@ gh license <command> --help
 
 #### Usage
 
-Create a license file
-
 ```sh
-gh license create <licenseID>
+gh-license create [flags]
 ```
 
 #### Flags
 
-| Flag                | Description              | Default      |
-| ------------------- | ------------------------ | ------------ |
-| `--author, -a`      | Specify the author name  |              |
-| `--year, -y`        | Specify the year         | Current year |
-| `--project, -p`     | Specify the project name |              |
-| `--description, -d` | Describe the project     |              |
-| `--output, -o`      | Output file              | `LICENSE`    |
+| Flag          | Description                                 | Default    |
+| ------------- | ------------------------------------------- | ---------- |
+| `author`      | Author of the project                       | Shresht7   |
+| `description` | Project description                         |            |
+| `output`      | Filepath                                    | LICENSE    |
+| `project`     | Project name                                | gh-license |
+| `web`         | Create license file using the web interface | false      |
+| `year`        | Year                                        | 2023       |
 
 #### Examples
 
-##### Create a MIT license with author name
-
 ```sh
-gh license create mit --author YourName
-```
-
-##### Create a GPL-3.0 license with project details in license.txt
-
-```sh
-gh license create GPL-3.0 --output license.txt --author YourName --year 2022 --project "Your Project" --description "An amazing project"
+  gh-license create mit
+  gh-license create mit --author Shresht7 --year 2023
+  gh-license create --web
+  gh-license create mit --web
 ```
 
 <div align="right">
@@ -135,15 +84,34 @@ gh license create GPL-3.0 --output license.txt --author YourName --year 2022 --p
 [⬆️ Back to top][top]
 
 </div>
+
 
 ### `list`
 
+Show a list of licenses
+
+
+
 #### Usage
 
-View a list of all licenses
+```sh
+gh-license list [flags]
+```
+
+#### Flags
+
+| Flag          | Description                     | Default |
+| ------------- | ------------------------------- | ------- |
+| `json`        | Output in JSON format           | false   |
+| `pretty-json` | Output in pretty JSON format    | false   |
+| `web`         | Open the license in the browser | false   |
+
+#### Examples
 
 ```sh
-gh license list
+  gh-license list
+  gh-license list --json
+  gh-license list --pretty-json
 ```
 
 <div align="right">
@@ -152,7 +120,49 @@ gh license list
 
 </div>
 
+
+### `repo`
+
+View license of a repository
+
+#### Alias
+
+`r`
+
+#### Usage
+
+```sh
+gh-license repo [flags]
+```
+
+#### Flags
+
+| Flag          | Description                             | Default |
+| ------------- | --------------------------------------- | ------- |
+| `json`        | Print the license in JSON format        | false   |
+| `pretty-json` | Print the license in pretty JSON format | false   |
+| `web`         | Open the license in the browser         | false   |
+
+#### Examples
+
+```sh
+  gh license repo
+  gh license repo Shresht7/gh-license
+  gh license repo gh-license
+  gh license repo --json
+  gh license repo Shresht7/gh-license --pretty-json
+```
+
+<div align="right">
+
+[⬆️ Back to top][top]
+
+</div>
+
+
 ### `view`
+
+View details about a particular license
 
 #### Alias
 
@@ -160,16 +170,24 @@ gh license list
 
 #### Usage
 
-View details about a particular license
-
 ```sh
-gh license view <licenseID>
+gh-license view [flags]
 ```
+
+#### Flags
+
+| Flag          | Description                                     | Default |
+| ------------- | ----------------------------------------------- | ------- |
+| `json`        | Print the license details in JSON format        | false   |
+| `pretty-json` | Print the license details in pretty JSON format | false   |
+| `web`         | Open the license in the browser                 | false   |
 
 #### Examples
 
 ```sh
-gh license view MIT
+  gh-license view mit
+  gh-license view mit --json
+  gh-license view mit --pretty-json
 ```
 
 <div align="right">
@@ -177,6 +195,8 @@ gh license view MIT
 [⬆️ Back to top][top]
 
 </div>
+
+
 
 ---
 

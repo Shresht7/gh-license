@@ -4,9 +4,14 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
+	"text/template"
 
+	"github.com/Shresht7/Scribe/helpers"
+	"github.com/Shresht7/Scribe/markdown"
 	"github.com/Shresht7/gh-license/cmd"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 // Generate generates the documentation for the given package.
@@ -14,6 +19,12 @@ func main() {
 
 	// Generate documentation in the current directory
 	err := GenerateDocumentation(cmd.RootCmd, "docs", true)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Generate the README.md file
+	err = GenerateREADME()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -61,6 +72,60 @@ func GenerateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 			}
 
 		}
+	}
+
+	return nil
+}
+
+func GenerateREADME() error {
+
+	// Generate the README.md file
+	// Create the README.md file
+	w, err := os.Create("README.md")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer w.Close()
+
+	tmpl := template.Must(template.ParseFiles(
+		"docs/templates/README.md",
+		"docs/templates/_back-to-top.md",
+		"docs/templates/_command.md",
+	))
+
+	err = tmpl.Execute(w, Map(cmd.RootCmd.Commands(), func(cmd *cobra.Command) map[string]string {
+		return map[string]string{
+			"Name":        cmd.Name(),
+			"Description": cmd.Short,
+			"Aliases": strings.Join(
+				Map(cmd.Aliases, func(x string) string {
+					return helpers.Wrap("`", x)
+				}), ", "),
+			"Usage": cmd.UseLine(),
+			"Flags": (func() string {
+				flags := cmd.Flags()
+				if flags == nil || !flags.HasFlags() {
+					return ""
+				}
+
+				headers := []string{"Flag", "Description", "Default"}
+				rows := [][]string{}
+
+				flags.VisitAll(func(flag *pflag.Flag) {
+					rows = append(rows, []string{
+						helpers.Wrap("`", flag.Name),
+						flag.Usage,
+						flag.DefValue,
+					})
+				})
+
+				return markdown.Table(headers, rows).String()
+			})(),
+			"Examples": cmd.Example,
+		}
+	}))
+	if err != nil {
+		return err
 	}
 
 	return nil
