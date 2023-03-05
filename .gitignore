@@ -14,7 +14,12 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+# Executables
 /gh-license
 /gh-license.exe
 
+# Video files (for demonstration)
+*.mp4
+
+# VS Code Workspace
 *.code-workspace
