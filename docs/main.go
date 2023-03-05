@@ -9,9 +9,10 @@ import (
 
 	"github.com/Shresht7/Scribe/helpers"
 	"github.com/Shresht7/Scribe/markdown"
-	"github.com/Shresht7/gh-license/cmd"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	"github.com/Shresht7/gh-license/cmd"
 )
 
 // Generate generates the documentation for the given package.
