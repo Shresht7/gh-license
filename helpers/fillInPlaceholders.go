@@ -30,7 +30,7 @@ var placeholders = map[string][]string{
 	},
 }
 
-// Substitute placeholders in the given contents with provided substitutions
+// FillInPlaceholders replaces all placeholders in the provided contents with the provided substitutions.
 func FillInPlaceholders(contents string, substitutions map[string]string) string {
 
 	// Iterate over placeholders and substitute them with the provided substitutions

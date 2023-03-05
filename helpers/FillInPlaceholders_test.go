@@ -14,7 +14,7 @@ var substitutions = map[string]string{
 
 func TestFillInPlaceholders(t *testing.T) {
 
-	// Setup test cases and expected results
+	// Test Cases
 	testCases := []struct {
 		contents    string
 		expected    string
@@ -87,7 +87,7 @@ func TestFillInPlaceholders(t *testing.T) {
 		},
 	}
 
-	// Run test cases
+	// Run Test Cases
 	for _, testCase := range testCases {
 		actual := FillInPlaceholders(testCase.contents, substitutions)
 		if actual != testCase.expected {

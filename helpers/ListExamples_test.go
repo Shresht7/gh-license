@@ -13,7 +13,6 @@ func TestListExamples(t *testing.T) {
 		"gh license create mit --author \"John Doe\"",
 		"gh license create mit --year 2020 --author \"John Doe\"",
 	}
-
 	result := ListExamples(examples)
 
 	// ! Mind the 2 spaces before each example. This output is what looks good with cobra.
@@ -25,6 +24,6 @@ func TestListExamples(t *testing.T) {
 `
 
 	if result != expected {
-		t.Errorf("Expected \n %s \n\n got \n %s", expected, result)
+		t.Errorf("want:\n%s\n\ngot:\n%s", expected, result)
 	}
 }
