@@ -34,7 +34,6 @@ gh-license create [flags]
   gh-license create mit --author Shresht7 --year 2023
   gh-license create --web
   gh-license create mit --web
-
 ```
 
 ## See Also

@@ -32,7 +32,6 @@ gh-license repo [flags]
   gh license repo gh-license
   gh license repo --json
   gh license repo Shresht7/gh-license --pretty-json
-
 ```
 
 ## See Also

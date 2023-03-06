@@ -120,7 +120,7 @@ func generateMarkdown(cmd *cobra.Command) (string, error) {
 	// Write the examples
 	if len(cmd.Example) > 0 {
 		doc.WriteHeading(2, "Examples")
-		doc.WriteCodeBlock(cmd.Example)
+		doc.WriteCodeBlock(strings.TrimRight(cmd.Example, "\n"))
 	}
 
 	// Write the see also section

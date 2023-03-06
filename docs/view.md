@@ -30,7 +30,6 @@ gh-license view [flags]
   gh-license view mit
   gh-license view mit --json
   gh-license view mit --pretty-json
-
 ```
 
 ## See Also

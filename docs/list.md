@@ -26,7 +26,6 @@ gh-license list [flags]
   gh-license list
   gh-license list --json
   gh-license list --pretty-json
-
 ```
 
 ## See Also
