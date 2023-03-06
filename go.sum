@@ -1,6 +1,8 @@
 github.com/MakeNowJust/heredoc v1.0.0 h1:cXCdzVdstXyiTqTvfqk9SDHpKNjxuom+DOlyEeQ4pzQ=
 github.com/Shresht7/Scribe v0.0.0-20230304200059-6818497402a1 h1:x5DPJW/SBq9ewtJOhT3824HcTDvRCRrRQjpeY8h1CFg=
 github.com/Shresht7/Scribe v0.0.0-20230304200059-6818497402a1/go.mod h1:WimxLOkc+dMlgXQnrT9IVzTMtZO2GpRkxj1saJB7QAI=
+github.com/Shresht7/sliceutils v1.0.0 h1:q4QYv5ZVY+7zi5qsVYicFGUOD03QSPZU2CDA+CFKhrk=
+github.com/Shresht7/sliceutils v1.0.0/go.mod h1:2VOK7qfJAyk13XQJaq0dlAJpZ9e6QG4U95oZ5mxF/mw=
 github.com/aymanbagabas/go-osc52 v1.2.1 h1:q2sWUyDcozPLcLabEMd+a+7Ea2DitxZVN9hTxab9L4E=
 github.com/aymanbagabas/go-osc52 v1.2.1/go.mod h1:zT8H+Rk4VSabYN90pWyugflM3ZhpTZNC7cASDfUCdT4=
 github.com/cli/browser v1.1.0 h1:xOZBfkfY9L9vMBgqb1YwRirGu6QFaQ5dP/vXt5ENSOY=

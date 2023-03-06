@@ -9,13 +9,14 @@ import (
 
 	"github.com/Shresht7/Scribe/helpers"
 	"github.com/Shresht7/Scribe/markdown"
+	"github.com/Shresht7/sliceutils/slice"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
 	"github.com/Shresht7/gh-license/cmd"
 )
 
-// Generate generates the documentation for the given package.
+// Generate generates the documentation for this project.
 func main() {
 
 	// Generate documentation in the current directory
@@ -94,12 +95,12 @@ func GenerateREADME() error {
 		"docs/templates/_command.md",
 	))
 
-	err = tmpl.Execute(w, Map(cmd.RootCmd.Commands(), func(cmd *cobra.Command) map[string]string {
+	err = tmpl.Execute(w, slice.Map(cmd.RootCmd.Commands(), func(cmd *cobra.Command, idx int) map[string]string {
 		return map[string]string{
 			"Name":        cmd.Name(),
 			"Description": cmd.Short,
 			"Aliases": strings.Join(
-				Map(cmd.Aliases, func(x string) string {
+				slice.Map(cmd.Aliases, func(x string, i int) string {
 					return helpers.Wrap("`", x)
 				}), ", "),
 			"Usage": cmd.UseLine(),

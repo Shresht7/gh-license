@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/Shresht7/Scribe v0.0.0-20230304200059-6818497402a1
+	github.com/Shresht7/sliceutils v1.0.0
 	github.com/cli/go-gh v1.0.0
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/pflag v1.0.5

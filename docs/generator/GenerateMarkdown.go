@@ -3,11 +3,11 @@ package main
 import (
 	"strings"
 
-	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
-
 	"github.com/Shresht7/Scribe/helpers"
 	md "github.com/Shresht7/Scribe/markdown"
+	"github.com/Shresht7/sliceutils/slice"
+	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 // GenerateMarkdown generates the markdown for the given command.
@@ -26,7 +26,7 @@ func GenerateMarkdown(cmd *cobra.Command) (string, error) {
 	if len(cmd.Aliases) > 0 {
 		doc.WriteHeading(2, "Aliases")
 		doc.WriteParagraph(
-			strings.Join(Map(cmd.Aliases, func(alias string) string {
+			strings.Join(slice.Map(cmd.Aliases, func(alias string, i int) string {
 				return helpers.Wrap("`", alias)
 			}), ", "))
 	}
