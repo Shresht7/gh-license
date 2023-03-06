@@ -61,14 +61,14 @@ gh-license create [flags]
 
 #### Flags
 
-| Flag          | Description                                 | Default          |
-| ------------- | ------------------------------------------- | ---------------- |
-| `author`      | Author of the project                       | [AuthorName]     |
-| `description` | Project description                         |                  |
-| `output`      | Filepath                                    | LICENSE          |
-| `project`     | Project name                                | [RepositoryName] |
-| `web`         | Create license file using the web interface | false            |
-| `year`        | Year                                        | [CurrentYear]    |
+| Flag                | Type     | Description                                 | Default          |
+| ------------------- | -------- | ------------------------------------------- | ---------------- |
+| `--author, -a`      | `string` | Author of the project                       | [AuthorName]     |
+| `--description, -d` | `string` | Project description                         |                  |
+| `--output, -o`      | `string` | Filepath                                    | LICENSE          |
+| `--project, -p`     | `string` | Project name                                | [RepositoryName] |
+| `--web, -w`         | `bool`   | Create license file using the web interface | false            |
+| `--year, -y`        | `string` | Year                                        | [CurrentYear]    |
 
 #### Examples
 
@@ -100,11 +100,11 @@ gh-license list [flags]
 
 #### Flags
 
-| Flag          | Description                     | Default |
-| ------------- | ------------------------------- | ------- |
-| `json`        | Output in JSON format           | false   |
-| `pretty-json` | Output in pretty JSON format    | false   |
-| `web`         | Open the license in the browser | false   |
+| Flag                | Type   | Description                     | Default |
+| ------------------- | ------ | ------------------------------- | ------- |
+| `--json, -j`        | `bool` | Output in JSON format           | false   |
+| `--pretty-json, -p` | `bool` | Output in pretty JSON format    | false   |
+| `--web, -w`         | `bool` | Open the license in the browser | false   |
 
 #### Examples
 
@@ -137,11 +137,11 @@ gh-license repo [flags]
 
 #### Flags
 
-| Flag          | Description                             | Default |
-| ------------- | --------------------------------------- | ------- |
-| `json`        | Print the license in JSON format        | false   |
-| `pretty-json` | Print the license in pretty JSON format | false   |
-| `web`         | Open the license in the browser         | false   |
+| Flag                | Type   | Description                             | Default |
+| ------------------- | ------ | --------------------------------------- | ------- |
+| `--json, -j`        | `bool` | Print the license in JSON format        | false   |
+| `--pretty-json, -p` | `bool` | Print the license in pretty JSON format | false   |
+| `--web, -w`         | `bool` | Open the license in the browser         | false   |
 
 #### Examples
 
@@ -176,11 +176,11 @@ gh-license view [flags]
 
 #### Flags
 
-| Flag          | Description                                     | Default |
-| ------------- | ----------------------------------------------- | ------- |
-| `json`        | Print the license details in JSON format        | false   |
-| `pretty-json` | Print the license details in pretty JSON format | false   |
-| `web`         | Open the license in the browser                 | false   |
+| Flag                | Type   | Description                                     | Default |
+| ------------------- | ------ | ----------------------------------------------- | ------- |
+| `--json, -j`        | `bool` | Print the license details in JSON format        | false   |
+| `--pretty-json, -p` | `bool` | Print the license details in pretty JSON format | false   |
+| `--web, -w`         | `bool` | Open the license in the browser                 | false   |
 
 #### Examples
 

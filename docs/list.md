@@ -2,6 +2,8 @@
 
 Show a list of licenses
 
+
+
 ## Description
 
 Show a list of licenses available on GitHub.
@@ -30,7 +32,8 @@ gh-license list [flags]
 
 ## See Also
 
-* [gh-license](./gh-license.md)
-* [create](./create.md)
-* [repo](./repo.md)
-* [view](./view.md)
+- [gh-license](./gh-license.md)
+- [create](./create.md)
+- [repo](./repo.md)
+- [view](./view.md)
+

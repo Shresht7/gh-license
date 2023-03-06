@@ -27,7 +27,7 @@ func generateREADME(cmd *cobra.Command) error {
 		"docs/templates/_command-readme.md",
 	))
 
-	err = tmpl.Execute(w, slice.Map(cmd.Commands(), func(cmd *cobra.Command, idx int) map[string]string {
+	err = tmpl.Execute(w, slice.Map(cmd.Commands(), func(cmd *cobra.Command, idx int) map[string]any {
 		return toTemplateData(cmd)
 	}))
 	if err != nil {

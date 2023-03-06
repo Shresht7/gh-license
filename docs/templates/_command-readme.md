@@ -27,7 +27,7 @@
 #### Examples
 
 ```sh
-{{ .Examples -}}
+{{ .Examples }}
 ```
 {{- end }}
 

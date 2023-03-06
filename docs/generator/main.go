@@ -36,8 +36,8 @@ func main() {
 
 // toTemplateData converts a cobra command to a map of strings that can be used
 // in a template. This is used to generate the documentation for a command.
-func toTemplateData(cmd *cobra.Command) map[string]string {
-	return map[string]string{
+func toTemplateData(cmd *cobra.Command) map[string]any {
+	return map[string]any{
 
 		"Name": cmd.Name(),
 
@@ -60,12 +60,26 @@ func toTemplateData(cmd *cobra.Command) map[string]string {
 				return ""
 			}
 
-			headers := []string{"Flag", "Description", "Default"}
-			rows := [][]string{}
+			headers := []string{"Flag", "Type", "Description", "Default"}
 
-			flags.VisitAll(func(flag *pflag.Flag) {
+			// Instantiate the rows
+			rows := [][]string{}
+			cmd.Flags().VisitAll(func(flag *pflag.Flag) {
+
+				// Make the default value generic
+				switch flag.Name {
+				case "author":
+					flag.DefValue = "[AuthorName]"
+				case "project":
+					flag.DefValue = "[RepositoryName]"
+				case "year":
+					flag.DefValue = "[CurrentYear]"
+				}
+
+				// Append the row
 				rows = append(rows, []string{
-					helpers.Wrap("`", flag.Name),
+					"`--" + flag.Name + ", -" + flag.Shorthand + "`",
+					helpers.Wrap("`", flag.Value.Type()),
 					flag.Usage,
 					flag.DefValue,
 				})
@@ -74,6 +88,31 @@ func toTemplateData(cmd *cobra.Command) map[string]string {
 			return markdown.Table(headers, rows).String()
 		})(),
 
-		"Examples": cmd.Example,
+		"Examples": strings.TrimRight(cmd.Example, "\n"),
+
+		"SeeAlso": (func() []string {
+			links := []string{}
+			// Link to the parent command
+			if cmd.HasParent() {
+				links = append(links, linkFile(cmd.Parent().Name()))
+
+				// Link to the other sibling commands
+				for _, subCmd := range cmd.Parent().Commands() {
+					if subCmd != cmd {
+						links = append(links, linkFile(subCmd.Name()))
+					}
+				}
+			}
+			// Link to the child commands
+			for _, subCmd := range cmd.Commands() {
+				links = append(links, linkFile(subCmd.Name()))
+			}
+
+			return links
+		})(),
 	}
+}
+
+func linkFile(name string) string {
+	return markdown.Link(name, "./"+name+".md").String()
 }

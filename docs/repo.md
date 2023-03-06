@@ -36,7 +36,8 @@ gh-license repo [flags]
 
 ## See Also
 
-* [gh-license](./gh-license.md)
-* [create](./create.md)
-* [list](./list.md)
-* [view](./view.md)
+- [gh-license](./gh-license.md)
+- [create](./create.md)
+- [list](./list.md)
+- [view](./view.md)
+

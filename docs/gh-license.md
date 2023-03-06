@@ -2,9 +2,19 @@
 
 List and create license files
 
+
+
 ## Description
 
 List and create license files using GitHub's license API
+
+## Usage
+
+```
+gh-license
+```
+
+
 
 ## Examples
 
@@ -18,7 +28,8 @@ List and create license files using GitHub's license API
 
 ## See Also
 
-* [create](./create.md)
-* [list](./list.md)
-* [repo](./repo.md)
-* [view](./view.md)
+- [create](./create.md)
+- [list](./list.md)
+- [repo](./repo.md)
+- [view](./view.md)
+
