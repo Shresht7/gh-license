@@ -44,8 +44,61 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 		}
 	}
 
+	i, err := os.Create(filepath.Join(dir, "README.md"))
+	if err != nil {
+		return err
+	}
+	defer i.Close()
+
+	// Generate the index file
+	md, err = generateIndex(cmd)
+	if err != nil {
+		return err
+	}
+	i.WriteString(md)
+
 	// If all goes as planned, return nil (no error)
 	return nil
+}
+
+func generateIndex(cmd *cobra.Command) (string, error) {
+
+	// Create a new markdown document
+	doc := md.NewDocument()
+
+	// Write the title
+	doc.WriteHeading(1, helpers.Wrap("`", cmd.Name()))
+
+	// Write the short description
+	doc.WriteParagraph(cmd.Short)
+
+	// Write the long description
+	if cmd.Long != "" {
+		doc.WriteHeading(2, "Description")
+		doc.WriteParagraph(cmd.Long)
+	}
+
+	// Write the usage
+	doc.WriteHeading(2, "Usage")
+	doc.WriteCodeBlock(strings.TrimRight(cmd.Example, "\n"))
+
+	// Write the commands
+	doc.WriteHeading(2, "Commands")
+
+	commands := []string{}
+	for _, subCmd := range cmd.Commands() {
+		text := linkFile(subCmd.Name())
+		if subCmd.Short != "" {
+			text += " - " + subCmd.Short
+		}
+		commands = append(commands, text)
+	}
+
+	doc.WriteUnorderedList(commands)
+
+	// Return the markdown
+	return doc.String(), nil
+
 }
 
 // Generates markdown documentation for the given cobra command.
