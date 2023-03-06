@@ -61,14 +61,14 @@ gh-license create [flags]
 
 #### Flags
 
-| Flag          | Description                                 | Default    |
-| ------------- | ------------------------------------------- | ---------- |
-| `author`      | Author of the project                       | Shresht7   |
-| `description` | Project description                         |            |
-| `output`      | Filepath                                    | LICENSE    |
-| `project`     | Project name                                | gh-license |
-| `web`         | Create license file using the web interface | false      |
-| `year`        | Year                                        | 2023       |
+| Flag          | Description                                 | Default          |
+| ------------- | ------------------------------------------- | ---------------- |
+| `author`      | Author of the project                       | [AuthorName]     |
+| `description` | Project description                         |                  |
+| `output`      | Filepath                                    | LICENSE          |
+| `project`     | Project name                                | [RepositoryName] |
+| `web`         | Create license file using the web interface | false            |
+| `year`        | Year                                        | [CurrentYear]    |
 
 #### Examples
 
@@ -204,8 +204,8 @@ gh-license view [flags]
 
 This software is licensed under the [MIT License](). See the [LICENSE](./LICENSE) file for details.
 
-<!-- ----- -->
-<!-- LINKS -->
-<!-- ----- -->
+
+
+
 
 [top]: #gh-license

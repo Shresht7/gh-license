@@ -93,6 +93,18 @@ func generateMarkdown(cmd *cobra.Command) (string, error) {
 		// Instantiate the rows
 		rows := [][]string{}
 		cmd.Flags().VisitAll(func(flag *pflag.Flag) {
+
+			// Make the default value generic
+			switch flag.Name {
+			case "author":
+				flag.DefValue = "[AuthorName]"
+			case "project":
+				flag.DefValue = "[RepositoryName]"
+			case "year":
+				flag.DefValue = "[CurrentYear]"
+			}
+
+			// Append the row
 			rows = append(rows, []string{
 				"`--" + flag.Name + ", -" + flag.Shorthand + "`",
 				helpers.Wrap("`", flag.Value.Type()),
