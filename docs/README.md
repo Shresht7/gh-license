@@ -16,8 +16,6 @@ List and create license files using GitHub's license API
   gh license create mit --year 2020 --author "John Doe"
 ```
 
-> For more information, see the [gh-license](./gh-license.md).
-
 ## Commands
 
 * [create](./create.md) - Create a license file
