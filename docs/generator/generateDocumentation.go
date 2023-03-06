@@ -25,7 +25,7 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 
 	// Create and parse the template definitions
 	tmpl := template.Must(template.ParseFiles(
-		"docs/templates/_command-full.md",
+		"docs/templates/command.md",
 		"docs/templates/_back-to-top.md",
 	))
 
