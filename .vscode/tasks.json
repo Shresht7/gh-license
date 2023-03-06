@@ -15,7 +15,7 @@
         {
             "label": "doc",
             "type": "shell",
-            "command": "go run docs/generator/main.go docs/generator/GenerateMarkdown.go",
+            "command": "go run docs/generator/main.go docs/generator/generateREADME.go docs/generator/generateDocumentation.go",
             "group": {
                 "kind": "build",
                 "isDefault": true

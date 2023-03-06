@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/Shresht7/Scribe/helpers"
@@ -10,8 +12,44 @@ import (
 	"github.com/spf13/pflag"
 )
 
-// GenerateMarkdown generates the markdown for the given command.
-func GenerateMarkdown(cmd *cobra.Command) (string, error) {
+// Generates the documentation for the given cobra command. If recurse is true,
+// it will recurse through the subcommands and generate documentation for them as well
+func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
+
+	// Generate the markdown file for the command
+	path := filepath.Join(dir, cmd.Name()+".md")
+	w, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer w.Close()
+
+	// Generate the markdown for the command and write it to the file
+	md, err := generateMarkdown(cmd)
+	if err != nil {
+		return err
+	}
+	w.WriteString(md)
+
+	// Recurse through the subcommands...
+	if recurse {
+		for _, subCmd := range cmd.Commands() {
+
+			// ... and generate documentation for them
+			err := generateDocumentation(subCmd, dir, recurse)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+
+	// If all goes as planned, return nil (no error)
+	return nil
+}
+
+// Generates markdown documentation for the given cobra command.
+func generateMarkdown(cmd *cobra.Command) (string, error) {
 
 	// Create a new markdown document
 	doc := md.NewDocument()
@@ -81,18 +119,18 @@ func GenerateMarkdown(cmd *cobra.Command) (string, error) {
 	links := []string{}
 	// Link to the parent command
 	if cmd.HasParent() {
-		links = append(links, LinkFile(cmd.Parent().Name()))
+		links = append(links, linkFile(cmd.Parent().Name()))
 
 		// Link to the other sibling commands
 		for _, subCmd := range cmd.Parent().Commands() {
 			if subCmd != cmd {
-				links = append(links, LinkFile(subCmd.Name()))
+				links = append(links, linkFile(subCmd.Name()))
 			}
 		}
 	}
 	// Link to the child commands
 	for _, subCmd := range cmd.Commands() {
-		links = append(links, LinkFile(subCmd.Name()))
+		links = append(links, linkFile(subCmd.Name()))
 	}
 	// Write the links
 	doc.WriteUnorderedList(links)
@@ -107,6 +145,9 @@ func GenerateMarkdown(cmd *cobra.Command) (string, error) {
 
 }
 
-func LinkFile(name string) string {
+// HELPER FUNCTIONS
+// ----------------
+
+func linkFile(name string) string {
 	return md.Link(name, "./"+name+".md").String()
 }
