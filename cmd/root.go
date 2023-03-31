@@ -15,7 +15,7 @@ import (
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:     "gh-license",
-	Version: "0.1.0",
+	Version: "0.3.0",
 	Short:   "List and create license files",
 	Long:    `List and create license files using GitHub's license API`,
 	Example: helpers.ListExamples([]string{
