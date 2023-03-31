@@ -48,13 +48,14 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 		}
 	}
 
+	// Create the index file for all the commands
 	i, err := os.Create(filepath.Join(dir, "README.md"))
 	if err != nil {
 		return err
 	}
 	defer i.Close()
 
-	// Generate the index file
+	// Generate the index file contents
 	md, err := generateIndex(cmd)
 	if err != nil {
 		return err
@@ -65,6 +66,7 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 	return nil
 }
 
+// Generates the index file for the given commands and returns the markdown
 func generateIndex(cmd *cobra.Command) (string, error) {
 
 	// Create a new markdown document
