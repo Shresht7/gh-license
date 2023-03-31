@@ -13,6 +13,15 @@
             }
         },
         {
+            "label": "doc",
+            "type": "shell",
+            "command": "go run docs/generator/main.go docs/generator/toTemplateData.go docs/generator/generateREADME.go docs/generator/generateDocumentation.go",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "test",
             "type": "shell",
             "command": "go test ./...",

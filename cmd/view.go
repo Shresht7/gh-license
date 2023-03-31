@@ -86,7 +86,7 @@ var viewCmd = &cobra.Command{
 
 func init() {
 	//	Add view command
-	rootCmd.AddCommand(viewCmd)
+	RootCmd.AddCommand(viewCmd)
 
 	//	Add flags to view command
 	viewCmd.Flags().BoolP("json", "j", false, "Print the license details in JSON format")

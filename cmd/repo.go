@@ -92,7 +92,7 @@ var repoCmd = &cobra.Command{
 
 func init() {
 	//	Add repo command
-	rootCmd.AddCommand(repoCmd)
+	RootCmd.AddCommand(repoCmd)
 
 	// Add flags to repo command
 	repoCmd.Flags().BoolP("json", "j", false, "Print the license in JSON format")

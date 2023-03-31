@@ -75,7 +75,7 @@ var listCmd = &cobra.Command{
 
 func init() {
 	// Add list command
-	rootCmd.AddCommand(listCmd)
+	RootCmd.AddCommand(listCmd)
 
 	// Add Flags
 	listCmd.Flags().BoolP("json", "j", false, "Output in JSON format")

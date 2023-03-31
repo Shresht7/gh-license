@@ -1,6 +1,8 @@
 package helpers
 
-// ListExamples takes a slice of examples and returns a raw string
+// ListExamples takes a slice of examples (strings) and returns
+// a string containing the examples, each on a new line, indented by two spaces.
+// This is used to display examples in the help text for commands.
 func ListExamples(examples []string) string {
 	var result string
 	for _, example := range examples {
