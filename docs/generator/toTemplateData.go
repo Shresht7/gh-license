@@ -34,12 +34,21 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 
 		"Usage": cmd.UseLine(),
 
+		"Commands": (func() []map[string]any {
+			commands := []map[string]any{}
+			for _, subCmd := range cmd.Commands() {
+				commands = append(commands, toTemplateData(subCmd))
+			}
+			return commands
+		})(),
+
 		"Flags": (func() string {
 			flags := cmd.Flags()
 			if flags == nil || !flags.HasFlags() {
 				return ""
 			}
 
+			// Instantiate the headers
 			headers := []string{"Flag", "Type", "Description", "Default"}
 
 			// Instantiate the rows
@@ -93,6 +102,7 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 	}
 }
 
+// linkFile returns a markdown link to the given file name.
 func linkFile(name string) string {
 	return markdown.Link(name, "./"+name+".md")
 }

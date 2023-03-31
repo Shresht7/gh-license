@@ -18,7 +18,8 @@ List and create license files using GitHub's license API
 
 ## Commands
 
-* [create](./create.md) - Create a license file
-* [list](./list.md) - Show a list of licenses
-* [repo](./repo.md) - View license of a repository
-* [view](./view.md) - View details about a particular license
+
+- [create](create.md) - Create a license file
+- [list](list.md) - Show a list of licenses
+- [repo](repo.md) - View license of a repository
+- [view](view.md) - View details about a particular license
