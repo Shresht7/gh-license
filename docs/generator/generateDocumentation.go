@@ -6,9 +6,10 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Shresht7/Scribe/helpers"
-	md "github.com/Shresht7/Scribe/markdown"
 	"github.com/spf13/cobra"
+
+	md "github.com/Shresht7/Scribe/markdown"
+	str "github.com/Shresht7/goutils/strings"
 )
 
 // Generates the documentation for the given cobra command. If recurse is true,
@@ -70,7 +71,7 @@ func generateIndex(cmd *cobra.Command) (string, error) {
 	doc := md.NewDocument()
 
 	// Write the title
-	doc.WriteHeading(1, helpers.Wrap("`", cmd.Name()))
+	doc.WriteHeading(1, str.Wrap("`", cmd.Name()))
 
 	// Write the short description
 	doc.WriteParagraph(cmd.Short)
@@ -88,7 +89,7 @@ func generateIndex(cmd *cobra.Command) (string, error) {
 	// Write the commands
 	doc.WriteHeading(2, "Commands")
 
-	commands := []string{}
+	commands := []any{}
 	for _, subCmd := range cmd.Commands() {
 		text := linkFile(subCmd.Name())
 		if subCmd.Short != "" {

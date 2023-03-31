@@ -5,8 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/Shresht7/sliceutils/slice"
 	"github.com/spf13/cobra"
+
+	"github.com/Shresht7/goutils/slice"
 )
 
 // Generates the main README.md file for the project.

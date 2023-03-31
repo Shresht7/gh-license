@@ -4,11 +4,13 @@ import (
 	"log"
 	"strings"
 
-	"github.com/Shresht7/Scribe/helpers"
-	"github.com/Shresht7/Scribe/markdown"
-	"github.com/Shresht7/sliceutils/slice"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	"github.com/Shresht7/Scribe/markdown"
+
+	"github.com/Shresht7/goutils/slice"
+	str "github.com/Shresht7/goutils/strings"
 
 	"github.com/Shresht7/gh-license/cmd"
 )
@@ -47,7 +49,7 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 
 		"Aliases": strings.Join(
 			slice.Map(cmd.Aliases, func(x string, i int) string {
-				return helpers.Wrap("`", x)
+				return str.Wrap("`", x)
 			}),
 			", ",
 		),
@@ -79,13 +81,13 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 				// Append the row
 				rows = append(rows, []string{
 					"`--" + flag.Name + ", -" + flag.Shorthand + "`",
-					helpers.Wrap("`", flag.Value.Type()),
+					str.Wrap("`", flag.Value.Type()),
 					flag.Usage,
 					flag.DefValue,
 				})
 			})
 
-			return markdown.Table(headers, rows).String()
+			return markdown.Table(headers, rows)
 		})(),
 
 		"Examples": strings.TrimRight(cmd.Example, "\n"),
@@ -114,5 +116,5 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 }
 
 func linkFile(name string) string {
-	return markdown.Link(name, "./"+name+".md").String()
+	return markdown.Link(name, "./"+name+".md")
 }
