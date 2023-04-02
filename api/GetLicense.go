@@ -1,31 +1,20 @@
 package api
 
-import (
-	"github.com/cli/go-gh"
-)
-
 // Reference: https://docs.github.com/en/rest/licenses?apiVersion=2022-11-28#get-a-license
 
 // Fetch a license from the GitHub API
 func GetLicense(license string) (License, error) {
 
-	// Instantiate the gh client
-	client, err := gh.RESTClient(nil)
-	if err != nil {
-		return License{}, err
-	}
-
-	// Set the endpoint
+	// Set the endpoint for the request
 	endpoint := "licenses/" + license
 
-	// Fetch the license from the GitHub API
-	response := License{} // Create a License struct to hold the response
-	err = client.Get(endpoint, &response)
+	// Get the License information from the API
+	response, err := request[License](endpoint)
 	if err != nil {
-		return License{}, err
+		return response, err
 	}
 
-	// Return the license information
+	// Return the response
 	return response, nil
 
 }
