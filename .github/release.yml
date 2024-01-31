@@ -13,23 +13,23 @@ changelog:
     #   - github-actions[bot]
 
   categories:
-    - title: 🚧 Breaking Changes 🏗
+    - title: 🚧 Breaking Changes
       labels:
         # - Semver-Major
         - breaking-change
 
-    - title: 🎂 New Features 🚀
+    - title: 🚀 New Features
       labels:
         # - Semver-Minor
         - enhancement
         - feature
 
-    - title: 🐛 Bug Fixes 🛠
+    - title: 🛠 Bug Fixes
       labels:
         # - Semver-Patch
         - bug
         - patch
 
-    - title: 🖥 Miscellaneous 📃
+    - title: 📃 Miscellaneous
       labels:
         - "*"
