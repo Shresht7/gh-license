@@ -6,7 +6,7 @@ require (
 	github.com/Shresht7/Scribe v0.0.0-20230331052318-69ae28065919
 	github.com/Shresht7/goutils v1.0.1-0.20230329002724-b33dbf34ca2a
 	github.com/cli/go-gh v1.2.1
-	github.com/spf13/cobra v1.6.1
+	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
 )
 
