@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -52,7 +53,7 @@ var createCmd = &cobra.Command{
 		if shouldLaunchWeb { // Check if web flag is set
 
 			// Open the license in the browser
-			url := determineUrl(name, author, repo, output)
+			url := determineNewLicenseUrl(name, author, repo, output)
 			err = helpers.OpenInBrowser(url)
 			if err != nil {
 				log.Fatalln(err)
@@ -96,29 +97,29 @@ var createCmd = &cobra.Command{
 	},
 }
 
-// ? See if there is a cleaner way to do this
-// Determine URL to create license file using the web interface
-func determineUrl(name, author, repo, output string) string {
-	// Determine URL to create license
-	url := fmt.Sprintf("https://github.com/%s/%s/community/license/new", author, repo)
+// Determine URL to create license file using GitHub's web interface
+func determineNewLicenseUrl(name, author, repo, output string) string {
 
-	// Add query params
-	queryParams := []string{}
+	// Create the base URL
+	baseURL := &url.URL{
+		Scheme: "https",
+		Host:   "github.com",
+		Path:   fmt.Sprintf("/%s/%s/community/license/new", author, repo),
+	}
+
+	// Encode Query Parameters
+	queryParams := url.Values{}
 	if name != "" {
-		queryParams = append(queryParams, "template="+name)
+		queryParams.Set("template", name)
 	}
 	if output != "" {
-		queryParams = append(queryParams, "filename="+output)
+		queryParams.Set("filename", output)
 	}
+	baseURL.RawQuery = queryParams.Encode()
 
-	// Convert to query string and add to URL
-	queryString := strings.Join(queryParams, "&")
-	if queryString != "" {
-		url += "?" + queryString
-	}
+	// Construct the URL
+	return baseURL.String()
 
-	// Return URL
-	return url
 }
 
 // ----
