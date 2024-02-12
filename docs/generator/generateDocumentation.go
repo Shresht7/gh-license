@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Generates the documentation for the given cobra command. If recurse is true,
+// Generates the documentation for the given cobra command in the given directory. If recurse is `true`,
 // it will recurse through the subcommands and generate documentation for them as well
 func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 
@@ -26,6 +26,7 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 		"docs/generator/templates/_back-to-top.md",
 	))
 
+	// Execute and write the template to the file
 	err = tmpl.Execute(w, toTemplateData(cmd))
 	if err != nil {
 		return err
@@ -57,6 +58,7 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 		"docs/generator/templates/_back-to-top.md",
 	))
 
+	// Execute and write the template to the README file
 	err = tmpl.Execute(i, toTemplateData(cmd))
 	if err != nil {
 		return err

@@ -11,7 +11,6 @@ import (
 )
 
 // Generates the main README.md file for the project.
-// It uses templates from the docs/generator/templates directory.
 func generateREADME(cmd *cobra.Command) error {
 
 	// Create the README.md file
@@ -28,6 +27,7 @@ func generateREADME(cmd *cobra.Command) error {
 		"docs/generator/templates/_command-readme.md",
 	))
 
+	// Execute the template and write the README.md file
 	err = tmpl.Execute(w, slice.Map(cmd.Commands(), func(cmd *cobra.Command, idx int) map[string]any {
 		return toTemplateData(cmd)
 	}))
