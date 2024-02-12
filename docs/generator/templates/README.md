@@ -40,7 +40,7 @@ gh license create mit
 
 ## ⌨️ Commands
 
-{{ range . }}
+{{ range .Commands }}
 {{- template "Command" . -}}
 {{ end }}
 

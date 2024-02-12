@@ -6,11 +6,10 @@ import (
 	"github.com/Shresht7/gh-license/cmd"
 )
 
-// Generate generates the documentation for this project
+// Generates documentation for this project
 func main() {
 
-	// Generate the documentation for the root command and all subcommands
-	// The documentation will be generated in the docs directory
+	// Generate the documentation for the root command and all subcommands in the "docs" folder
 	err := generateDocumentation(cmd.RootCmd, "docs", true)
 	if err != nil {
 		log.Fatal(err)

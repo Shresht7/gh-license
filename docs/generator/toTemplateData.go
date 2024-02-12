@@ -8,7 +8,6 @@ import (
 
 	"github.com/Shresht7/Scribe/markdown"
 	"github.com/Shresht7/goutils/slice"
-	str "github.com/Shresht7/goutils/strings"
 )
 
 // HELPER FUNCTIONS
@@ -27,7 +26,7 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 
 		"Aliases": strings.Join(
 			slice.Map(cmd.Aliases, func(x string, i int) string {
-				return str.Wrap("`", x)
+				return markdown.Code(x)
 			}),
 			", ",
 		),
@@ -68,7 +67,7 @@ func toTemplateData(cmd *cobra.Command) map[string]any {
 				// Append the row
 				rows = append(rows, []string{
 					"`--" + flag.Name + ", -" + flag.Shorthand + "`",
-					str.Wrap("`", flag.Value.Type()),
+					markdown.Code(flag.Value.Type()),
 					flag.Usage,
 					flag.DefValue,
 				})
