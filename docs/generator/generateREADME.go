@@ -6,8 +6,6 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-
-	"github.com/Shresht7/goutils/slice"
 )
 
 // Generates the main README.md file for the project.
@@ -28,9 +26,7 @@ func generateREADME(cmd *cobra.Command) error {
 	))
 
 	// Execute the template and write the README.md file
-	err = tmpl.Execute(w, slice.Map(cmd.Commands(), func(cmd *cobra.Command, idx int) map[string]any {
-		return toTemplateData(cmd)
-	}))
+	err = tmpl.Execute(w, toTemplateData(cmd))
 	if err != nil {
 		return err
 	}
