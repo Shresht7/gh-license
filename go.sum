@@ -2,8 +2,8 @@ github.com/MakeNowJust/heredoc v1.0.0 h1:cXCdzVdstXyiTqTvfqk9SDHpKNjxuom+DOlyEeQ
 github.com/MakeNowJust/heredoc v1.0.0/go.mod h1:mG5amYoWBHf8vpLOuehzbGGw0EHxpZZ6lCpQ4fNJ8LE=
 github.com/Shresht7/Scribe v0.0.0-20230331052318-69ae28065919 h1:mzh6mS7G4eC3GzXLZykFVpqjv0m2ZGKqu6QR1UPK43M=
 github.com/Shresht7/Scribe v0.0.0-20230331052318-69ae28065919/go.mod h1:Enn4zLcd2goPFp5Bg60tS45gD7tXy42S9as4/XZVhf8=
-github.com/Shresht7/goutils v1.0.1-0.20230329002724-b33dbf34ca2a h1:DnGH8aOKEqJ1e5VAO4LjZrSJqdCtvR+F1Luo44Dugvs=
-github.com/Shresht7/goutils v1.0.1-0.20230329002724-b33dbf34ca2a/go.mod h1:DAAYnKxkRAC69A7BBc+VcXcQdd52pc/m9Tlex8w3vOc=
+github.com/Shresht7/goutils v1.1.0 h1:vobGBZfQjQlcQ0FJdw2ZUf5VE+1an9FGA5xvTZXAWoc=
+github.com/Shresht7/goutils v1.1.0/go.mod h1:JHyPJMAP4G51532l1qkRmYBT4EVOtJ/8nNkx+sLTiOo=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/cli/browser v1.1.0 h1:xOZBfkfY9L9vMBgqb1YwRirGu6QFaQ5dP/vXt5ENSOY=
