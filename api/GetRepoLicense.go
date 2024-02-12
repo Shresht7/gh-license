@@ -4,17 +4,6 @@ package api
 
 // Fetch a license of a repository from the GitHub API
 func GetRepoLicense(owner, repo string) (LicenseContent, error) {
-
-	// Set the endpoint
 	endpoint := "repos/" + owner + "/" + repo + "/license"
-
-	// Get the License information from the API
-	response, err := request[LicenseContent](endpoint)
-	if err != nil {
-		return response, err
-	}
-
-	// Return the response
-	return response, nil
-
+	return request[LicenseContent](endpoint)
 }
