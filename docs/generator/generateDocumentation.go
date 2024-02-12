@@ -22,8 +22,8 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 
 	// Create and parse the template definitions
 	tmpl := template.Must(template.ParseFiles(
-		"docs/templates/command.md",
-		"docs/templates/_back-to-top.md",
+		"docs/generator/templates/command.md",
+		"docs/generator/templates/_back-to-top.md",
 	))
 
 	err = tmpl.Execute(w, toTemplateData(cmd))
@@ -53,8 +53,8 @@ func generateDocumentation(cmd *cobra.Command, dir string, recurse bool) error {
 
 	// Create and parse the template definitions
 	tmpl = template.Must(template.ParseFiles(
-		"docs/templates/index.md",
-		"docs/templates/_back-to-top.md",
+		"docs/generator/templates/index.md",
+		"docs/generator/templates/_back-to-top.md",
 	))
 
 	err = tmpl.Execute(i, toTemplateData(cmd))
