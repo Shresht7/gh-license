@@ -73,7 +73,7 @@ var createCmd = &cobra.Command{
 		license, err := api.GetLicense(name)
 		if err != nil {
 			if strings.Contains(err.Error(), "404: Not Found") {
-				err = fmt.Errorf("%s\nLicense '%s' not found. Run `gh license list` to see a list of available licenses.", err, name)
+				err = fmt.Errorf("%s\nLicense '%s' not found. Run `gh license list` to see a list of available licenses", err, name)
 			}
 			log.Fatalln(err)
 			return
