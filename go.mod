@@ -3,7 +3,7 @@ module github.com/Shresht7/gh-license
 go 1.22
 
 require (
-	github.com/Shresht7/Scribe v0.0.0-20230403034126-e77a29238005
+	github.com/Shresht7/Scribe v0.1.0
 	github.com/Shresht7/goutils v1.1.0
 	github.com/cli/go-gh v1.2.1
 	github.com/spf13/cobra v1.8.0

@@ -1,7 +1,7 @@
 github.com/MakeNowJust/heredoc v1.0.0 h1:cXCdzVdstXyiTqTvfqk9SDHpKNjxuom+DOlyEeQ4pzQ=
 github.com/MakeNowJust/heredoc v1.0.0/go.mod h1:mG5amYoWBHf8vpLOuehzbGGw0EHxpZZ6lCpQ4fNJ8LE=
-github.com/Shresht7/Scribe v0.0.0-20230403034126-e77a29238005 h1:0BcFlkyU51RfPb4TYzovUt63qW78qm7ajm/4jysInvw=
-github.com/Shresht7/Scribe v0.0.0-20230403034126-e77a29238005/go.mod h1:Enn4zLcd2goPFp5Bg60tS45gD7tXy42S9as4/XZVhf8=
+github.com/Shresht7/Scribe v0.1.0 h1:tIYHjVAFdvV5mX6vIHi4RoX7bJld79BJOSbJNUnZGxo=
+github.com/Shresht7/Scribe v0.1.0/go.mod h1:rC0S5T1bNdu1+IUUct6j+2+ZDhZQFWHoPgI+dMdeELw=
 github.com/Shresht7/goutils v1.1.0 h1:vobGBZfQjQlcQ0FJdw2ZUf5VE+1an9FGA5xvTZXAWoc=
 github.com/Shresht7/goutils v1.1.0/go.mod h1:JHyPJMAP4G51532l1qkRmYBT4EVOtJ/8nNkx+sLTiOo=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
